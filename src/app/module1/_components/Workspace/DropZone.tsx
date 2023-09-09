@@ -23,7 +23,7 @@ const DropZone = ({ blockData }: Props) => {
   const dispatch = useAppDispatch();
   const [block, setBlock] = useState<string | null>(null);
   const [{ isOver }, drop] = useDrop({
-    accept: "card",
+    accept: ["card","dustbin"],
     drop: ({ blockType }: any) => {
       dispatch(setBlocks({ index: blockData.index, direction: blockType }));
       console.log("BlockType: ", blockType);

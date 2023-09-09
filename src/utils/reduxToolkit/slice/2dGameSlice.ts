@@ -6,6 +6,7 @@ interface GameState {
   steps: number;
   lastIndex: number;
   blocks: { index: number; direction: string | null }[];
+  play:boolean;
 }
 
 const initialState: GameState = {
@@ -17,6 +18,7 @@ const initialState: GameState = {
     index: index,
     direction: null,
   })),
+  play: false, 
 };
 
 const gameSlice = createSlice({
@@ -41,10 +43,17 @@ const gameSlice = createSlice({
       }
       console.log("Array - ",state.blocks);
     },
+   
+    setPlayState: (state,action: PayloadAction<{
+      playState:boolean;
+    }>)=>{
+      const {playState} = action.payload;
+      state.play = playState;
+    }
   },
 });
 
-export const { setBlocks } = gameSlice.actions;
+export const { setBlocks,setPlayState } = gameSlice.actions;
 
 export const getAllBlocks = (state: RootState) => state.game.blocks;
 
