@@ -5,9 +5,12 @@ import play from "../../../../assets/play.svg";
 import docSpeak from "../../../../assets/doc speak.svg";
 import Image from "next/image";
 
-type Props = {};
+type Props = {
+  activityTaskDescription: string,
+  activityTaskDestination: string
+};
 
-const ActivityTask = (props: Props) => {
+const ActivityTask = ({activityTaskDescription,activityTaskDestination}: Props) => {
   return (
     <div className="flex h-full w-full flex-col bg-Erie-Black">
       <Heading
@@ -18,11 +21,10 @@ const ActivityTask = (props: Props) => {
       <div className="relative flex h-full w-full -translate-y-5 items-center justify-center p-8">
         <div className="flex flex-col gap-5 font-OpenSans">
           <span className="text-sm font-light">
-            Gizmo arrives at the compound and notices the drone hovering in the
-            air, positioned a short distance away.
+           {activityTaskDescription}
           </span>
           <span className="text-sm font-bold">
-            Assist Gizmo to reach the drone.
+           {activityTaskDestination}
           </span>
         </div>
         <div className="absolute bottom-0 right-5 flex gap-5">

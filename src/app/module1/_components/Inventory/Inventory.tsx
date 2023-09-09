@@ -10,6 +10,11 @@ const Inventory = (props: Props) => {
         headingName="Inventory"
         extraClass="flex items-center justify-center"
       />
+      <div className="w-full h-full overflow-y-auto">
+        <div className="mx-2 my-4 bg-black h-full">
+
+        </div>
+      </div>
     </div>
   );
 };

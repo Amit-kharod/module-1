@@ -6,11 +6,14 @@ import PlayBtn from "./PlayBtn";
 import ResetBtn from "./ResetBtn";
 import { useAppSelector } from "@/utils/reduxToolkit/hook";
 import { getAllBlocks } from "@/utils/reduxToolkit/slice/2dGameSlice";
+import { getGameLevel } from "@/utils/reduxToolkit/slice/2dGameLevelSlice";
 
 type Props = {};
 
 const WorkSpace = (props: Props) => {
   const allBlocks = useAppSelector(getAllBlocks);
+  const gameLevel = useAppSelector(getGameLevel);
+  console.log("Game Level  - ",gameLevel);
   return (
     <div className="flex h-full w-full flex-col bg-Erie-Black">
       <Heading

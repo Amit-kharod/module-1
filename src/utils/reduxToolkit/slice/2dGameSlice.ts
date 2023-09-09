@@ -8,7 +8,6 @@ interface GameState {
   blocks: { index: number; direction: string | null }[];
   play:boolean;
 }
-
 const initialState: GameState = {
   steps: 0,
   lastIndex : 0,

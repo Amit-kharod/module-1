@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import gameSlice from "./slice/2dGameSlice";
+import gameLevelSlice from "./slice/2dGameLevelSlice";
 
 export const store = configureStore({
   reducer: {
     game: gameSlice.reducer,
+    gameLevel: gameLevelSlice.reducer
   },
 });
 
