@@ -21,6 +21,7 @@ type Props = {
 
 const DropZone = ({ blockData }: Props) => {
   const dispatch = useAppDispatch();
+  const blockIndex = useAppSelector((state)=>state.game.blockIndex);
   const [block, setBlock] = useState<string | null>(null);
   const [{ isOver }, drop] = useDrop({
     accept: ["card","dustbin"],
@@ -49,11 +50,11 @@ const DropZone = ({ blockData }: Props) => {
   useEffect(() => {
     setBlock(blockData.direction);
   }, [blockData.direction]);
-
+  console.log("BlockIndex - ",blockIndex);
   return (
     <div
-      className="relative flex h-11 w-11 items-center justify-center rounded border border-[#17FB99]
-      bg-white/25"
+      className={`${(blockIndex===blockData.index)?'border-2 border-t-[3px] border-b-[3px] border-red-500':'border border-[#17FB99]'} relative flex h-11 w-11 items-center justify-center rounded 
+      bg-white/25`}
       ref={drop}
     >
       {/*{block && (

@@ -6,12 +6,15 @@ export interface gameLevelsInterface {
     level: number,
     activityTaskDescription : string,
     activityTaskDestination : string,
-    workSpaceBlock : string[]
+    workSpaceBlock : string[],
+    dogStartPosition: [number,number],
+    batteryPosition?:[number,number][],
+    obstaclePosition?:[number,number][],
 }
 
 const gameLevelSlice = createSlice({
     name: "gameLevel",
-    initialState : {gameLevel:1},
+    initialState : {gameLevel:0},
     reducers: {
         setGameLevel: (state)=>{
             state.gameLevel = state.gameLevel+1

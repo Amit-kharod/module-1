@@ -2,21 +2,21 @@
 import React, { useEffect, useRef, useState } from 'react';
 import dogImage from '../../../../assets/dog.svg';
 import { useAppSelector,useAppDispatch } from '@/utils/reduxToolkit/hook';
-import { setPlayState } from '@/utils/reduxToolkit/slice/2dGameSlice';
+import { setBlockIndex, setPlayState } from '@/utils/reduxToolkit/slice/2dGameSlice';
 
 const GameMatrix = () => {
   const rowCount = 6;
   const colCount = 6;
   const initialDogPosition = [4, 3]; // Initial position of the dog
-  const directionArray = useAppSelector((state) => state.game.blocks);
   const [dogPosition, setDogPosition] = useState(initialDogPosition);
   const [directionIndex, setDirectionIndex] = useState(0);
-  //Check game is on play state or not
-  const isGamePlay = useAppSelector((state) => state.game.play);
   const dispatch = useAppDispatch();
   const directionIndexRef = useRef(directionIndex);
   const dogPositionRef = useRef(dogPosition);
+  //Check game is on play state or not
+  const isGamePlay = useAppSelector((state) => state.game.play);
   const lastFilledIndex = useAppSelector((state)=>state.game.lastIndex);
+  const directionArray = useAppSelector((state) => state.game.blocks);
 
   const moveDog = (direction:any) => {
     // Define how the dog moves based on the direction
@@ -38,6 +38,7 @@ const GameMatrix = () => {
         break;
     }
     setDogPosition(dogPositionRef.current);
+    dispatch(setBlockIndex());
   };
 
   useEffect(() => {
