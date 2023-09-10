@@ -14,6 +14,8 @@ const WorkSpace = (props: Props) => {
   const allBlocks = useAppSelector(getAllBlocks);
   const gameLevel = useAppSelector(getGameLevel);
   console.log("Game Level  - ",gameLevel);
+  const blockIndex = useAppSelector((state)=>state.game.blockIndex);
+  const blocks = useAppSelector((state)=>state.game.blocks);
   return (
     <div className="flex h-full w-full flex-col bg-Erie-Black">
       <Heading
@@ -22,7 +24,7 @@ const WorkSpace = (props: Props) => {
       />
       <div className="flex h-full w-full flex-col items-center justify-between bg-[#292F35] p-10 py-20">
         <p className="font-OpenSans text-sm font-light">
-          Gizmo Will Move Forward
+        Gizmo Will Move {blocks[blockIndex]?.direction}
         </p>
         <div className="grid grid-cols-6 grid-rows-3 gap-3">
           {allBlocks.map((block) => (
