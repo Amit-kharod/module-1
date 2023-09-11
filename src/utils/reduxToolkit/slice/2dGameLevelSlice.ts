@@ -8,8 +8,10 @@ export interface gameLevelsInterface {
     activityTaskDestination : string,
     workSpaceBlock : string[],
     dogStartPosition: [number,number],
-    batteryPosition?:[number,number][],
-    obstaclePosition?:[number,number][],
+    batteryPosition?:[number,number,string][],
+    obstaclePosition?:[number,number,string][],
+    obstacleImage?: string,
+    batteryImage?:string[],
 }
 
 const gameLevelSlice = createSlice({

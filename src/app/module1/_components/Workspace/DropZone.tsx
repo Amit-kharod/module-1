@@ -43,9 +43,7 @@ const DropZone = ({ blockData }: Props) => {
     content = <DroppableLeftBlock />;
   } else if (block === "right") {
     content = <DroppableRightBlock />;
-  } else {
-    content = <LeftArrow className="h-7 w-7" />;
-  }
+  } 
 
   useEffect(() => {
     setBlock(blockData.direction);
@@ -53,7 +51,7 @@ const DropZone = ({ blockData }: Props) => {
   console.log("BlockIndex - ",blockIndex);
   return (
     <div
-      className={`${(blockIndex===blockData.index)?'border-2 border-t-[3px] border-b-[3px] border-red-500':'border border-[#17FB99]'} relative flex h-11 w-11 items-center justify-center rounded 
+      className={`${(blockIndex===blockData.index)?'border border-[#17FB99] shadow-2xl':''} border border-[#17FB99] relative flex h-11 w-11 items-center justify-center rounded 
       bg-white/25`}
       ref={drop}
     >

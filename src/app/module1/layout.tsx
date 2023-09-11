@@ -29,7 +29,7 @@ export default function Module1Layout({
             <WorkSpace/>
           </div>
           <div className="flex w-[33.95%] flex-col">
-            <Output />
+            <Output/>
             <Inventory />
           </div>
         </DndProviderContext>

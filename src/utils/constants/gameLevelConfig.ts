@@ -1,5 +1,20 @@
 import { gameLevelsInterface } from "../reduxToolkit/slice/2dGameLevelSlice";
 
+export function checkObstaclePosition(row:number,col:number,obstaclePosition:[number,number,string][]|undefined):boolean
+{
+  if(obstaclePosition)
+  {
+    return obstaclePosition.some((position) => position[0] === row && position[1] === col);
+  }
+  return false;
+}
+export function checkBatteryPosition(row:number,col:number,filterBatteryPosition:[number,number,string][])
+{
+  const newBatteryPosition = filterBatteryPosition.filter((position) => !(position[0] === row && position[1] === col));
+ console.log("NewBatteryPosition:  ",newBatteryPosition);
+  return newBatteryPosition;
+}
+
 export const gameLevelsConfig : gameLevelsInterface[] = [
     {
       level: 1,
@@ -7,6 +22,8 @@ export const gameLevelsConfig : gameLevelsInterface[] = [
       activityTaskDestination :"Assist Gizmo to reach the drone.",
       workSpaceBlock : ["up","up","up"],
       dogStartPosition:[4,3],
+      obstaclePosition:[[1,2,"electric"],[2,4,"brick"],[3,1,"rain"],[4,4,"rain"],[6,3,"brick"],[6,5,"electric"]],
+      batteryPosition:[[6,1,"red"],[4,1,"green"],[4,6,"yellow"]],
     },
     {
       level: 2,
