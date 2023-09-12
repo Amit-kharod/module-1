@@ -141,7 +141,7 @@ const GameMatrix = () => {
           rowCells.push(
             <div
               key={cellValue}
-              className="bg-[#FCD731] border border-gray-500 h-14 w-14"
+              className="bg-[#FFC700] border border-gray-500 h-14 w-14"
             >
               <img src={dogImage.src} alt="dog" className="h-full w-full" />
             </div>
@@ -154,7 +154,7 @@ const GameMatrix = () => {
           rowCells.push(
             <div
               key={cellValue}
-              className="bg-[#FCD731] border border-gray-500 h-14 w-14"
+              className="bg-[#FFC700] border border-gray-500 h-14 w-14"
             >
                {matchingPosition && matchingPosition[2] === "electric" && <img src={electric.src} alt="electric" className="h-full w-full" />}
              {matchingPosition && matchingPosition[2] === "rain" && <img src={rain.src} alt="rain" className="h-full w-full" />}
@@ -170,7 +170,7 @@ const GameMatrix = () => {
           rowCells.push(
             <div
               key={cellValue}
-              className="bg-[#FCD731] border border-gray-500 h-14 w-14"
+              className="bg-[#FFC700] border border-gray-500 h-14 w-14"
             >
              {matchingPosition && matchingPosition[2] === "red" && <img src={redLED.src} alt="red" className="h-full w-full py-1" />}
              {matchingPosition && matchingPosition[2] === "green" && <img src={greenLED.src} alt="green" className="h-full w-full py-2" />}
@@ -182,7 +182,7 @@ const GameMatrix = () => {
           rowCells.push(
             <div
               key={cellValue}
-              className="bg-[#FCD731] border border-gray-500 h-14 w-14"
+              className="bg-[#FFC700] border border-gray-500 h-14 w-14"
             ></div>
           );
         }

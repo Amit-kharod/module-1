@@ -7,6 +7,7 @@ import ResetBtn from "./ResetBtn";
 import { useAppSelector } from "@/utils/reduxToolkit/hook";
 import { getAllBlocks } from "@/utils/reduxToolkit/slice/2dGameSlice";
 import { getGameLevel } from "@/utils/reduxToolkit/slice/2dGameLevelSlice";
+import DeleteBtn from "./DeleteBtn";
 
 type Props = {};
 
@@ -31,9 +32,14 @@ const WorkSpace = (props: Props) => {
             <DropZone key={block.index} blockData={block} />
           ))}
         </div>
-        <div className="flex gap-5">
+        <div className="flex">
+          <div className="flex gap-5">
           <PlayBtn />
           <ResetBtn />
+          </div>
+          <div className="">
+          <DeleteBtn/>
+          </div>
         </div>
       </div>
     </div>
