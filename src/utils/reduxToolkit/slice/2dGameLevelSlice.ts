@@ -1,7 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
-
+export interface CollectBattery {
+    red: number,
+    yellow: number,
+    green: number,
+    battery: number,
+    totalCollect:number,
+    totalBattery:number,
+};
 export interface gameLevelsInterface {
     level: number,
     activityTaskDescription : string,
@@ -12,6 +19,7 @@ export interface gameLevelsInterface {
     obstaclePosition?:[number,number,string][],
     obstacleImage?: string,
     batteryImage?:string[],
+    collectedBattery?:CollectBattery
 }
 
 const gameLevelSlice = createSlice({
@@ -20,7 +28,7 @@ const gameLevelSlice = createSlice({
     reducers: {
         setGameLevel: (state)=>{
             state.gameLevel = state.gameLevel+1
-        }
+        },
     }
 });
 

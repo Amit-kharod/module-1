@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import gameSlice from "./slice/2dGameSlice";
 import gameLevelSlice from "./slice/2dGameLevelSlice";
+import batteryCollectionSlice from "./slice/batteryCollectionSlice";
 
 export const store = configureStore({
   reducer: {
     game: gameSlice.reducer,
-    gameLevel: gameLevelSlice.reducer
+    gameLevel: gameLevelSlice.reducer,
+    batteryCollection: batteryCollectionSlice.reducer
   },
 });
 

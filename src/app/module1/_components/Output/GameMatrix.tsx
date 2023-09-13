@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import dogImage from '../../../../assets/dog.svg';
 import redLED from '../../../../assets/redLED.svg';
 import greenLED from '../../../../assets/greenLED.svg';
@@ -11,8 +11,11 @@ import { useAppSelector,useAppDispatch } from '@/utils/reduxToolkit/hook';
 import { setBlockIndex, setPlayState } from '@/utils/reduxToolkit/slice/2dGameSlice';
 import { checkBatteryPosition, checkObstaclePosition, gameLevelsConfig } from '@/utils/constants/gameLevelConfig';
 import NotRight from '../PopUp/NotRight';
-
-const GameMatrix = () => {
+import { setBatteryCollection } from '@/utils/reduxToolkit/slice/batteryCollectionSlice';
+interface Props{
+  gameLevel:number, 
+}
+const GameMatrix = ({gameLevel}:Props) => {
   const rowCount = 6;
   const colCount = 6;
   const initialDogPosition = [4, 3]; // Initial position of the dog
@@ -45,9 +48,12 @@ const GameMatrix = () => {
           }
           dogPositionRef.current = ([row - 1, col])
           if(filterBatteryPositionRef.current){
-           const newFilterPosition =  checkBatteryPosition(row-1,col,filterBatteryPositionRef.current);
-           setFilterBatteryPosition(newFilterPosition);
+           const newFilterPosition =  checkBatteryPosition(row-1,col,filterBatteryPositionRef.current,gameLevel);
+           if(newFilterPosition.length === filterBatteryPositionRef.current.length - 1){
+            dispatch(setBatteryCollection());
+           }
            filterBatteryPositionRef.current = newFilterPosition;
+           setFilterBatteryPosition(newFilterPosition);
           } 
         }else{
           alert('You lose');
@@ -61,9 +67,12 @@ const GameMatrix = () => {
           }
           dogPositionRef.current= ([row + 1, col])
           if(filterBatteryPositionRef.current){
-            const newFilterPosition =  checkBatteryPosition(row+1,col,filterBatteryPositionRef.current);
-            setFilterBatteryPosition(newFilterPosition);
-            filterBatteryPositionRef.current = newFilterPosition;
+            const newFilterPosition =  checkBatteryPosition(row+1,col,filterBatteryPositionRef.current,gameLevel);
+            if(newFilterPosition.length === filterBatteryPositionRef.current.length - 1){
+              dispatch(setBatteryCollection());
+             }
+             filterBatteryPositionRef.current = newFilterPosition;
+             setFilterBatteryPosition(newFilterPosition);
            } 
         }else{
           alert('You lose');
@@ -77,9 +86,14 @@ const GameMatrix = () => {
           }
           dogPositionRef.current = ([row, col - 1])
           if(filterBatteryPositionRef.current){
-            const newFilterPosition =  checkBatteryPosition(row,col-1,filterBatteryPositionRef.current);
-            setFilterBatteryPosition(newFilterPosition);
-            filterBatteryPositionRef.current = newFilterPosition;
+            const newFilterPosition =  checkBatteryPosition(row,col-1,filterBatteryPositionRef.current,gameLevel);
+            console.log("Length- ",newFilterPosition.length , filterBatteryPositionRef.current.length)
+            if(newFilterPosition.length === filterBatteryPositionRef.current.length - 1){
+              dispatch(setBatteryCollection());
+              console.log("Enter- ")
+             }
+             filterBatteryPositionRef.current = newFilterPosition;
+             setFilterBatteryPosition(newFilterPosition);
            } 
         }else{
           alert('You lose');
@@ -93,9 +107,12 @@ const GameMatrix = () => {
           }
           dogPositionRef.current = ([row, col + 1]);
           if(filterBatteryPositionRef.current){
-            const newFilterPosition =  checkBatteryPosition(row,col+1,filterBatteryPositionRef.current);
-            setFilterBatteryPosition(newFilterPosition);
+            const newFilterPosition =  checkBatteryPosition(row,col+1,filterBatteryPositionRef.current,gameLevel);
+            if(newFilterPosition.length === filterBatteryPositionRef.current.length - 1){
+              dispatch(setBatteryCollection());
+             }
             filterBatteryPositionRef.current = newFilterPosition;
+            setFilterBatteryPosition(newFilterPosition);
            } 
         }else{
           alert('You lose');

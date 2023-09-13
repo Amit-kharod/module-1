@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
+import { CollectBattery, getGameLevel } from "./2dGameLevelSlice";
+import { gameLevelsConfig } from "@/utils/constants/gameLevelConfig";
 
 interface GameState {
   steps: number;
@@ -42,7 +44,6 @@ const gameSlice = createSlice({
       else{
         state.blocks[state.lastIndex++].direction = direction;
       }
-      console.log("Array - ",state.blocks);
     },
    
     setPlayState: (state,action: PayloadAction<{

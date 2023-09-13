@@ -37,9 +37,7 @@ const WorkSpace = (props: Props) => {
           <PlayBtn />
           <ResetBtn />
           </div>
-          <div className="">
-          <DeleteBtn/>
-          </div>
+         
         </div>
       </div>
     </div>

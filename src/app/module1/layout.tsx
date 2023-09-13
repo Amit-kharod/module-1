@@ -8,6 +8,7 @@ import Output from "./_components/Output/Output";
 import Inventory from "./_components/Inventory/Inventory";
 import { gameLevelsConfig } from "@/utils/constants/gameLevelConfig";
 import { useAppSelector } from "@/utils/reduxToolkit/hook";
+import { useState } from "react";
 
 export default function Module1Layout({
   children,
@@ -15,9 +16,9 @@ export default function Module1Layout({
   children: React.ReactNode;
 }) {
   const currentGameLevel = useAppSelector((state)=>state.gameLevel.gameLevel);
-  const {activityTaskDescription,activityTaskDestination,workSpaceBlock} = gameLevelsConfig[currentGameLevel];
+  const {activityTaskDescription,activityTaskDestination,workSpaceBlock,collectedBattery} = gameLevelsConfig[currentGameLevel];
   return (
-    <section className="h-screen w-screen bg-Erie-Black text-white">
+    <section className="h-screen w-screen bg-Erie-Black text-white overflow-x-none overflow-y-none">
       <NavbarMain />
       <div className="flex h-[90vh] w-full gap-[0.5%]">
         <DndProviderContext>
@@ -29,8 +30,8 @@ export default function Module1Layout({
             <WorkSpace/>
           </div>
           <div className="flex w-[33.95%] flex-col">
-            <Output/>
-            <Inventory />
+            <Output gameLevel={currentGameLevel}/>
+            <Inventory collectBattery={collectedBattery}/>
           </div>
         </DndProviderContext>
       </div>
