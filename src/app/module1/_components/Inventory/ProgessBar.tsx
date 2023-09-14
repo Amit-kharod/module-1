@@ -1,5 +1,5 @@
 import { useAppSelector } from "@/utils/reduxToolkit/hook";
-import { CollectBattery } from "@/utils/reduxToolkit/slice/2dGameLevelSlice";
+import { CollectBattery } from "@/utils/reduxToolkit/slice/2dGameLevelInterface";
 import React, { useState } from "react";
 
 type Props ={

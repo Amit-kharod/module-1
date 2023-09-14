@@ -8,14 +8,14 @@ import Output from "./_components/Output/Output";
 import Inventory from "./_components/Inventory/Inventory";
 import { gameLevelsConfig } from "@/utils/constants/gameLevelConfig";
 import { useAppSelector } from "@/utils/reduxToolkit/hook";
-import { useState } from "react";
+import { setDropZone } from "@/utils/reduxToolkit/slice/2dGameSlice";
 
 export default function Module1Layout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const currentGameLevel = useAppSelector((state)=>state.gameLevel.gameLevel);
+  const currentGameLevel = useAppSelector((state)=>state.game.gameLevel);
   const {activityTaskDescription,activityTaskDestination,workSpaceBlock,collectedBattery} = gameLevelsConfig[currentGameLevel];
   return (
     <section className="h-screen w-screen bg-Erie-Black text-white overflow-x-none overflow-y-none">

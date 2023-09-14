@@ -6,17 +6,14 @@ import PlayBtn from "./PlayBtn";
 import ResetBtn from "./ResetBtn";
 import { useAppSelector } from "@/utils/reduxToolkit/hook";
 import { getAllBlocks } from "@/utils/reduxToolkit/slice/2dGameSlice";
-import { getGameLevel } from "@/utils/reduxToolkit/slice/2dGameLevelSlice";
+import { getGameLevel } from "@/utils/reduxToolkit/slice/2dGameSlice";
 import DeleteBtn from "./DeleteBtn";
 
 type Props = {};
 
 const WorkSpace = (props: Props) => {
   const allBlocks = useAppSelector(getAllBlocks);
-  const gameLevel = useAppSelector(getGameLevel);
-  console.log("Game Level  - ",gameLevel);
-  const blockIndex = useAppSelector((state)=>state.game.blockIndex);
-  const blocks = useAppSelector((state)=>state.game.blocks);
+  const {blockIndex,blocks,gameLevel} = useAppSelector((state)=>state.game);
   return (
     <div className="flex h-full w-full flex-col bg-Erie-Black">
       <Heading

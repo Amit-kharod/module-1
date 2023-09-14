@@ -1,6 +1,6 @@
 import React from "react";
 import Heading from "../Heading";
-import { CollectBattery } from "@/utils/reduxToolkit/slice/2dGameLevelSlice";
+import { CollectBattery } from "@/utils/reduxToolkit/slice/2dGameLevelInterface";
 import RectangleBg from '@/assets/reactangleBg.png';
 import redled from '@/assets/redLED.svg';
 import yellowled from '@/assets/yellowLED.svg';
@@ -23,22 +23,22 @@ const Inventory = ({ collectBattery }: Props) => {
       
        
       <div className="flex flex-wrap  items-center justify-center pt-2">
-        {collectBattery && collectBattery.red && <div className="relative">
+        {collectBattery && collectBattery.red>0 && <div className="relative">
           <img src={RectangleBg.src} alt="Rectangle Background" className="relative" />
           <img src={redled.src} alt="Red LED" className="absolute inset-0 m-auto" />
           <h1 className="absolute bottom-0 left-1/2 transform -translate-x-1/2 text-white text-xs font-normal font-['Inter'] ">Red led</h1>
         </div>}
-        {collectBattery && collectBattery.yellow && <div className="relative">
+        {collectBattery && collectBattery.yellow>0 && <div className="relative">
           <img src={RectangleBg.src} alt="Rectangle Background" className="relative" />
           <img src={yellowled.src} alt="Yellow LED" className="absolute inset-0 m-auto" />
           <h1 className="absolute bottom-0 left-1/2 transform -translate-x-1/2 text-white text-xs font-normal font-['Inter'] ">Yellow led</h1>
         </div>}
-        {collectBattery && collectBattery.green && <div className="relative">
+        {collectBattery && collectBattery.green>0 && <div className="relative">
           <img src={RectangleBg.src} alt="Rectangle Background" className="relative" />
           <img src={greenled.src} alt="green LED" className="absolute inset-0 m-auto" />
           <h1 className="absolute bottom-0 left-1/2 transform -translate-x-1/2 text-white text-xs font-normal font-['Inter'] ">Green led</h1>
         </div>}
-        {collectBattery && collectBattery.battery && <div className="relative">
+        {collectBattery && collectBattery.battery>0 && <div className="relative">
           <img src={RectangleBg.src} alt="Rectangle Background" className="relative" />
           <img src={redled.src} alt="Red LED" className="absolute inset-0 m-auto" />
           <h1 className="absolute bottom-0 left-1/2 transform -translate-x-1/2 text-white text-xs font-normal font-['Inter'] ">Battery</h1>

@@ -48,7 +48,6 @@ const DropZone = ({ blockData }: Props) => {
   useEffect(() => {
     setBlock(blockData.direction);
   }, [blockData.direction]);
-  console.log("BlockIndex - ",blockIndex);
   return (
     <div
       className={`${(blockIndex===blockData.index)?'border border-[#17FB99] shadow-2xl':''} border border-[#17FB99] relative flex h-11 w-11 items-center justify-center rounded 

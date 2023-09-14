@@ -8,20 +8,21 @@ import rain from '../../../../assets/rain.svg';
 import brick from '../../../../assets/brick.svg';
 import electric from '../../../../assets/electric.svg';
 import { useAppSelector,useAppDispatch } from '@/utils/reduxToolkit/hook';
-import { setBlockIndex, setPlayState } from '@/utils/reduxToolkit/slice/2dGameSlice';
+import { resetGameLevel, setBlockIndex, setDropZone, setPlayState } from '@/utils/reduxToolkit/slice/2dGameSlice';
 import { checkBatteryPosition, checkObstaclePosition, gameLevelsConfig } from '@/utils/constants/gameLevelConfig';
-import NotRight from '../PopUp/NotRight';
 import { setBatteryCollection } from '@/utils/reduxToolkit/slice/batteryCollectionSlice';
+import { setGameLevel } from '@/utils/reduxToolkit/slice/2dGameSlice';
 interface Props{
   gameLevel:number, 
 }
 const GameMatrix = ({gameLevel}:Props) => {
   const rowCount = 6;
   const colCount = 6;
-  const initialDogPosition = [4, 3]; // Initial position of the dog
-  const [dogPosition, setDogPosition] = useState(initialDogPosition);
+  const currentGameLevel = useAppSelector((state)=>state.game.gameLevel);
+  const {batteryPosition,obstaclePosition,dogStartPosition,dogEndPosition} = gameLevelsConfig[currentGameLevel];
+  console.log("-- ",{batteryPosition,obstaclePosition,dogStartPosition,dogEndPosition});
+  const [dogPosition, setDogPosition] = useState(dogStartPosition);
   const [directionIndex, setDirectionIndex] = useState(0);
-  const showPopupRef = useRef(false);
   const dispatch = useAppDispatch();
   const directionIndexRef = useRef(directionIndex);
   const dogPositionRef = useRef(dogPosition);
@@ -31,11 +32,21 @@ const GameMatrix = ({gameLevel}:Props) => {
   const lastFilledIndex = useAppSelector((state)=>state.game.lastIndex);
   //Directions filled in workspace empty box.
   const directionArray = useAppSelector((state) => state.game.blocks);
-  const currentGameLevel = useAppSelector((state)=>state.gameLevel.gameLevel);
-  const {batteryPosition,obstaclePosition,dogStartPosition} = gameLevelsConfig[currentGameLevel];
+  console.log("directionArray- ",directionArray);
   //FilterBatteryPosition
   const [filterBatteryPosition,setFilterBatteryPosition] = useState(batteryPosition);
   const filterBatteryPositionRef = useRef(batteryPosition);
+
+  useEffect(()=>{
+    dispatch(setDropZone());
+    dispatch(resetGameLevel());
+    setDogPosition(dogStartPosition);
+    setDirectionIndex(0);
+    directionIndexRef.current =directionIndex;
+    setFilterBatteryPosition(batteryPosition);
+    dogPositionRef.current = dogStartPosition;
+  },[currentGameLevel])
+  
   const moveDog = (direction:any) => {
     // Define how the dog moves based on the direction
     const [row, col] = dogPositionRef.current;
@@ -46,7 +57,7 @@ const GameMatrix = ({gameLevel}:Props) => {
             alert("You lose");
             return;
           }
-          dogPositionRef.current = ([row - 1, col])
+          dogPositionRef.current = ([row - 1, col]);
           if(filterBatteryPositionRef.current){
            const newFilterPosition =  checkBatteryPosition(row-1,col,filterBatteryPositionRef.current,gameLevel);
            if(newFilterPosition.length === filterBatteryPositionRef.current.length - 1){
@@ -123,6 +134,11 @@ const GameMatrix = ({gameLevel}:Props) => {
     }
     setDogPosition(dogPositionRef.current);
     dispatch(setBlockIndex());
+    if(dogPositionRef.current[0] === dogEndPosition[0] && dogPositionRef.current[1] === dogEndPosition[1]){
+      alert("Game win");
+      dispatch(setGameLevel());
+      return;
+    }
   };
 
   useEffect(() => {
@@ -192,6 +208,17 @@ const GameMatrix = ({gameLevel}:Props) => {
              {matchingPosition && matchingPosition[2] === "red" && <img src={redLED.src} alt="red" className="h-full w-full py-1" />}
              {matchingPosition && matchingPosition[2] === "green" && <img src={greenLED.src} alt="green" className="h-full w-full py-2" />}
             { matchingPosition && matchingPosition[2] === "yellow" && <img src={yellowLED.src} alt="yellow" className="h-full w-full py-2" />}
+            </div>
+          );
+        }
+        else if(row === dogEndPosition[0] && col === dogEndPosition[1])
+        {
+          rowCells.push(
+            <div
+              key={cellValue}
+              className="bg-[#FFC700] border border-gray-500 h-14 w-14"
+            >
+              <img src={dogEndPosition[2].src} alt="dog" className="h-full w-full" />
             </div>
           );
         }
