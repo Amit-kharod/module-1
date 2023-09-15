@@ -7,6 +7,7 @@ interface GameState {
   steps: number;
   lastIndex: number;
   blocks: { index: number; direction: string | null }[];
+  collectedInventory:{info:string; image:any}[];
   play: boolean;
   blockIndex: number;
   gameLevel: number;
@@ -16,9 +17,10 @@ const initialState: GameState = {
   steps: 0,
   lastIndex: 0,
   blocks: [],
+  collectedInventory:[],
   play: false,
   blockIndex: -1,
-  gameLevel: 0,
+  gameLevel: 4,
 };
 
 const gameSlice = createSlice({
@@ -61,6 +63,7 @@ const gameSlice = createSlice({
       state.lastIndex = 0;
       state.steps = 0;
       state.play = false;
+      state.collectedInventory = [];
     },
 
     setDropZone: (state) => {
@@ -79,6 +82,13 @@ const gameSlice = createSlice({
         })),
       };
     },
+
+    setCollectInventory: (state,action: PayloadAction<{
+      info: string,
+      image:any}>)=>{
+        const {info,image} = action.payload;
+        state.collectedInventory.push({info,image});
+    }
   },
 });
 
@@ -89,6 +99,7 @@ export const {
   setGameLevel,
   resetGameLevel,
   setDropZone,
+  setCollectInventory
 } = gameSlice.actions;
 
 export const getGameLevel = (state: RootState) => state.game.gameLevel;

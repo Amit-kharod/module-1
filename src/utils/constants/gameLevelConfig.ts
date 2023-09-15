@@ -3,6 +3,35 @@ import houseGifImage from '@/assets/destinationgif/housegif.gif';
 import traingif from '@/assets/destinationgif/traingif.gif';
 import buildinggif from '@/assets/destinationgif/buildinggif.gif';
 import craftgif from '@/assets/destinationgif/craftgif.gif';
+import cafegif from '@/assets/obstaclegif/cafegif.gif';
+import bombgif from '@/assets/obstaclegif/bombgif.gif';
+import pollutedfactorygif from '@/assets/destinationgif/pollutedfactorygif.gif';
+import raingif from '@/assets/obstaclegif/raingif.gif';
+import rod from '@/assets/rod.svg'
+import octopusgif from '@/assets/obstaclegif/octopusgif.gif';
+import fishgif from '@/assets/obstaclegif/fishgif.gif';
+import shipgif from '@/assets/obstaclegif/shipgif.gif';
+import switchgif from '@/assets/batterygif/switchgif.gif';
+import redled from '@/assets/redLED.svg';
+import yellowled from '@/assets/yellowLED.svg';
+import greenled from '@/assets/greenLED.svg';
+import brick from '@/assets/brick.svg';
+import mystryboxgif from '@/assets/batterygif/mystryboxgif.gif';
+import sparkgif from '@/assets/obstaclegif/sparkgif.gif';
+import woodengif from '@/assets/obstaclegif/woodgif.gif';
+import carpentrygif from '@/assets/batterygif/carpentrygif.gif';
+import bottlemachinerygif from '@/assets/obstaclegif/bottlemachinerygif.gif';
+import chakrigif from '@/assets/obstaclegif/chakrigif.gif';
+import mapgif from '@/assets/destinationgif/mapgif.gif';
+import ilandgif from '@/assets/obstaclegif/ilandgif.gif';
+import treegif from '@/assets/obstaclegif/treegif.gif';
+import runwaygif from '@/assets/destinationgif/rynwaygif.gif';
+import dronegif from '@/assets/destinationgif/dronegif.gif';
+import aeroplanegif from '@/assets/obstaclegif/aeroplanegif.gif';
+import mirrorhousegif from '@/assets/obstaclegif/mirrorhousegif.gif';
+import { setCollectInventory } from "../reduxToolkit/slice/2dGameSlice";
+import { Dispatch } from "react";
+import { AnyAction } from "@reduxjs/toolkit";
 
 export const gameLevelsConfig : gameLevelsInterface[] = [
   {
@@ -44,8 +73,12 @@ export const gameLevelsConfig : gameLevelsInterface[] = [
     workSpaceBlock : 20,
     dogStartPosition:[4,3],
     dogEndPosition:[6,3,craftgif],
-    obstaclePosition:[[1,2,"electric"],[2,4,"brick"],[3,1,"rain"],[4,4,"rain"],[6,3,"brick"],[6,5,"electric"]],
-    batteryPosition:[[1,6,"red"],[5,6,"green"],[2,2,"yellow"]],
+    obstaclePosition:[[1,2,cafegif],[2,4,cafegif],[3,1,cafegif],[4,4,cafegif],[6,5,cafegif],[6,6,cafegif]],
+    batteryPosition:[[1,6,redled],[5,6,greenled],[2,2,yellowled]],
+    collectedBattery:{
+      totalCollect:0,
+      totalBattery:3
+    }
   },
   {
     level: 6,
@@ -53,9 +86,13 @@ export const gameLevelsConfig : gameLevelsInterface[] = [
     activityTaskDestination :"Assist Gizmo in safely collecting the batteries and organizing their dispatch using intelligent parcel boxes. ",
     workSpaceBlock : 12,
     dogStartPosition:[4,3],
-    dogEndPosition:[6,3,''],
-    obstaclePosition:[[1,3,"bomb"],[1,4,"factory"],[2,6,"factory"],[3,5,"bomb"],[6,3,"brick"],[6,5,"electric"]],
-    batteryPosition:[[1,6,"red"],[5,6,"green"],[2,2,"yellow"]],
+    dogEndPosition:[6,3,craftgif],    
+    obstaclePosition:[[1,3,bombgif],[3,5,bombgif],[4,2,bombgif],[6,6,bombgif]],
+    batteryPosition:[[1,4,pollutedfactorygif],[2,6,pollutedfactorygif],[3,6,pollutedfactorygif],[4,1,pollutedfactorygif],[6,5,pollutedfactorygif]],
+    collectedBattery:{
+      totalCollect:0,
+      totalBattery:5
+    }
   },
   {
     level: 7,
@@ -63,9 +100,13 @@ export const gameLevelsConfig : gameLevelsInterface[] = [
     activityTaskDestination :"Provide guidance to Gizmo to collect and dispatch the wires while skillfully avoiding the rain . ",
     workSpaceBlock : 18,
     dogStartPosition:[4,3],
-    dogEndPosition:[6,3,''],
-    obstaclePosition:[[1,6,"rain"],[2,6,"rain"],[3,2,"rain"],[3,3,"rain"],[3,4,"rain"],[3,6,"rain"],[5,1,"rain"],[6,1,"rain"],[6,5,"rain"],[6,6,"rain"]],
-    batteryPosition:[[1,1,"rod"],[4,6,"rod"]],
+    dogEndPosition:[6,3,craftgif],
+    obstaclePosition:[[1,6,raingif],[2,6,raingif],[3,2,raingif],[3,3,raingif],[3,4,raingif],[3,6,raingif],[5,1,raingif],[6,1,raingif],[6,5,raingif],[6,6,raingif]],
+    batteryPosition:[[1,1,rod],[4,6,rod]],
+    collectedBattery:{
+      totalCollect:0,
+      totalBattery:2
+    }
   },
   {
     level: 8,
@@ -73,9 +114,13 @@ export const gameLevelsConfig : gameLevelsInterface[] = [
     activityTaskDestination :"Help Gizmo to secure the switch and dispatch it.  ",
     workSpaceBlock : 10,
     dogStartPosition:[4,3],
-    dogEndPosition:[6,3,''],
-    obstaclePosition:[[1,2,"octopus"],[1,5,"fish"],[2,1,"fish"],[2,3,"fish"],[3,1,"octopus"],[3,6,"octopus"],[5,4,"ship"]],
-    batteryPosition:[[2,4,"switch"]],
+    dogEndPosition:[6,3,craftgif],
+    obstaclePosition:[[1,2,octopusgif],[1,5,fishgif],[2,1,fishgif],[2,3,fishgif],[3,1,octopusgif],[3,6,octopusgif],[5,4,shipgif]],
+    batteryPosition:[[2,4,switchgif]],
+    collectedBattery:{
+      totalCollect:0,
+      totalBattery:1
+    }
   },
   {
     level: 9,
@@ -83,8 +128,13 @@ export const gameLevelsConfig : gameLevelsInterface[] = [
     activityTaskDestination :"Assist Gizmo to carefully collect and dispatch all the components without activating the bomb.   ",
     workSpaceBlock : 18,
     dogStartPosition:[4,3],
-    dogEndPosition:[6,3,''],
-    obstaclePosition:[[1,2,"wall"],[2,2,"wall"],[3,2,"wall"],[2,4,"wall"],[2,5,"wall"],[2,6,"wall"],[5,2,"wall"],[5,3,"wall"],[5,4,"wall"],[5,6,"wall"],[6,4,"wall"],[1,4,"hiddenBox"],[3,6,"hiddenBox"]],
+    dogEndPosition:[6,3,craftgif],
+    obstaclePosition:[[1,2,brick],[2,2,brick],[3,2,brick],[2,4,brick],[2,5,brick],[2,6,brick],[5,2,brick],[5,3,brick],[5,4,brick],[5,6,brick],[6,4,brick]],
+    batteryPosition:[[1,3,mystryboxgif],[3,6,mystryboxgif],[6,1,mystryboxgif]],
+    collectedBattery:{
+      totalCollect:0,
+      totalBattery:3
+    }
   },
   {
     level: 10,
@@ -92,9 +142,13 @@ export const gameLevelsConfig : gameLevelsInterface[] = [
     activityTaskDestination :"Assist Gizmo to skillfully collect and dispatch the wooden sheets while carefully avoiding contact with the electrified wires. ",
     workSpaceBlock : 18,
     dogStartPosition:[4,3],
-    dogEndPosition:[6,3,''],
-    obstaclePosition:[[1,6,"wire"],[2,3,"wire"],[2,6,"wire"],[3,4,"wire"],[4,5,"wire"],[5,1,"wire"],[6,1,"wire"]],
-    batteryPosition:[[3,5,"wooden"]],
+    dogEndPosition:[6,3,craftgif],
+    obstaclePosition:[[1,6,sparkgif],[2,3,sparkgif],[2,6,sparkgif],[3,4,sparkgif],[4,5,sparkgif],[5,1,sparkgif],[6,1,sparkgif]],
+    batteryPosition:[[3,5,woodengif]],
+    collectedBattery:{
+      totalCollect:0,
+      totalBattery:1
+    }
   },
   {
     level: 11,
@@ -102,9 +156,50 @@ export const gameLevelsConfig : gameLevelsInterface[] = [
     activityTaskDestination :"Help Gizmo to navigate through the factory environment to collect and dispatch the toolbox without causing any disruptions.",
     workSpaceBlock : 18,
     dogStartPosition:[4,3],
-    dogEndPosition:[6,3,''],
-    obstaclePosition:[[1,6,"wire"],[2,3,"wire"],[2,6,"wire"],[3,4,"wire"],[4,5,"wire"],[5,1,"wire"],[6,1,"wire"]],
-    batteryPosition:[[3,5,"wooden"]],
+    dogEndPosition:[6,3,craftgif],
+    obstaclePosition:[[1,4,bottlemachinerygif],[1,6,bottlemachinerygif],[2,2,bottlemachinerygif],[2,3,bottlemachinerygif],[2,6,bottlemachinerygif],[3,1,bottlemachinerygif],[4,2,bottlemachinerygif],[4,5,bottlemachinerygif]],
+    batteryPosition:[[3,4,carpentrygif]],
+    collectedBattery:{
+      totalCollect:0,
+      totalBattery:1
+    }
+  },
+  {
+    level: 12,
+    activityTaskDescription : "Having successfully gathered all the components, Gizmo's next step is to return to Rhea. However, he finds himself lost in the town due to the numerous adventures he embarked upon. Fortunately, there's a map of the town available in a nearby shop. But the landscape around is filled with quicksand and the shops are about to close. ",
+    activityTaskDestination :"Guide Gizmo through the shortest route, ensuring he reaches the shops before they close.",
+    workSpaceBlock : 18,
+    dogStartPosition:[4,3],
+    dogEndPosition:[1,6,mapgif],
+    obstaclePosition:[[1,1,chakrigif],[1,2,chakrigif],[1,5,chakrigif],[3,5,chakrigif],[4,1,chakrigif],[4,4,chakrigif],[6,3,chakrigif],[6,6,chakrigif]],
+  },
+  {
+    level: 13,
+    activityTaskDescription : "Gizmo scans the map and realises that he needs to cross the river by boat and subsequently catch a train to meet Rhea. As it is starting to get dark,the last boat will soon depart.     ",
+    activityTaskDestination :"Guide Gizmo to take the shortest possible route to reach the boat.",
+    workSpaceBlock : 18,
+    dogStartPosition:[4,3],
+    dogEndPosition:[1,2,shipgif],
+    obstaclePosition:[[1,4,ilandgif],[1,5,ilandgif],[2,1,ilandgif],[2,2,ilandgif],[4,5,ilandgif],[4,6,ilandgif],[5,1,ilandgif],[5,2,ilandgif]],
+  },
+  {
+    level: 14,
+    activityTaskDescription : "Gizmo makes his way to the train station, only to discover that he's missed the last train of the day. Gizmo reaches out to Rhea, conveying his inability to return without assistance. Rhea then plans to deploy a drone that will transport Gizmo back to her location. However, for this plan to work, Gizmo must relocate himself into a nearby runway.",
+    activityTaskDestination :"Leading Gizmo to the designated runway so that he can be transported back to Rhea using the drone.",
+    workSpaceBlock : 18,
+    dogStartPosition:[4,3],
+    dogEndPosition:[6,6,runwaygif],
+    obstaclePosition:[[1,6,treegif],[2,2,shipgif],[2,6,ilandgif],[4,4,traingif]],
+  },
+  {
+    level: 15,
+    activityTaskDescription : "Gizmo arrives at the compound and notices the drone hovering in the air, positioned a short distance away. ",
+    activityTaskDestination :"Assist Gizmo to reach the drone.",
+    workSpaceBlock : 18,
+    dogStartPosition:[4,3],
+    dogEndPosition:[2,5,dronegif],
+    obstaclePosition:[[1,2,aeroplanegif],[2,4,aeroplanegif],[3,1,aeroplanegif],[3,4,aeroplanegif],[6,3,aeroplanegif],[6,5,aeroplanegif],[6,1,mirrorhousegif]],
+
   },
 ]
 
@@ -117,25 +212,13 @@ export function checkObstaclePosition(row:number,col:number,obstaclePosition:[nu
   }
   return false;
 }
-export function checkBatteryPosition(row: number, col: number, filterBatteryPosition: [number, number, string][],gameLevel:number) {
+export function checkBatteryPosition(row: number, col: number, filterBatteryPosition: [number, number, string][],dispatch: Dispatch<AnyAction>) {
   
   // Use reduce with an explicitly typed accumulator
   const newBatteryPosition: [number, number, string][] = filterBatteryPosition.reduce((accumulator, position) => {
     if (position[0] === row && position[1] === col) {
       // If it's a match, store it in matchingBattery
-  
-    const collectedBattery = gameLevelsConfig[gameLevel]?.collectedBattery;
-    if (collectedBattery) {
-      if(position[2] === "red")
-        collectedBattery.red = (collectedBattery.red || 0) + 1;
-      else if(position[2] === "yellow")
-        collectedBattery.yellow = (collectedBattery.yellow || 0) + 1;
-      else if(position[2] === "green")
-        collectedBattery.green = (collectedBattery.green || 0) + 1;
-      else if(position[2] === "battery")
-        collectedBattery.battery = (collectedBattery.battery || 0) + 1;
-      collectedBattery.totalCollect += 1;
-    } 
+      dispatch(setCollectInventory({info:"",image:position[2]}));
     } else {
       // If it's not a match, add it to the accumulator
       accumulator.push(position);
@@ -143,7 +226,6 @@ export function checkBatteryPosition(row: number, col: number, filterBatteryPosi
     return accumulator;
   }, [] as [number, number, string][]); // Initialize the accumulator with the correct type
 
-  console.log("Matching Battery Position: ", gameLevelsConfig[gameLevel]?.collectedBattery);
   console.log("New Battery Position: ", newBatteryPosition);
   
   return newBatteryPosition;

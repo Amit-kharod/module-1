@@ -1,12 +1,6 @@
 "use client";
 import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import dogImage from '../../../../assets/dog.svg';
-import redLED from '../../../../assets/redLED.svg';
-import greenLED from '../../../../assets/greenLED.svg';
-import yellowLED from '../../../../assets/yellowLED.svg';
-import rain from '../../../../assets/rain.svg';
-import brick from '../../../../assets/brick.svg';
-import electric from '../../../../assets/electric.svg';
 import { useAppSelector,useAppDispatch } from '@/utils/reduxToolkit/hook';
 import { resetGameLevel, setBlockIndex, setDropZone, setPlayState } from '@/utils/reduxToolkit/slice/2dGameSlice';
 import { checkBatteryPosition, checkObstaclePosition, gameLevelsConfig } from '@/utils/constants/gameLevelConfig';
@@ -20,7 +14,6 @@ const GameMatrix = ({gameLevel}:Props) => {
   const colCount = 6;
   const currentGameLevel = useAppSelector((state)=>state.game.gameLevel);
   const {batteryPosition,obstaclePosition,dogStartPosition,dogEndPosition} = gameLevelsConfig[currentGameLevel];
-  console.log("-- ",{batteryPosition,obstaclePosition,dogStartPosition,dogEndPosition});
   const [dogPosition, setDogPosition] = useState(dogStartPosition);
   const [directionIndex, setDirectionIndex] = useState(0);
   const dispatch = useAppDispatch();
@@ -32,7 +25,6 @@ const GameMatrix = ({gameLevel}:Props) => {
   const lastFilledIndex = useAppSelector((state)=>state.game.lastIndex);
   //Directions filled in workspace empty box.
   const directionArray = useAppSelector((state) => state.game.blocks);
-  console.log("directionArray- ",directionArray);
   //FilterBatteryPosition
   const [filterBatteryPosition,setFilterBatteryPosition] = useState(batteryPosition);
   const filterBatteryPositionRef = useRef(batteryPosition);
@@ -59,7 +51,7 @@ const GameMatrix = ({gameLevel}:Props) => {
           }
           dogPositionRef.current = ([row - 1, col]);
           if(filterBatteryPositionRef.current){
-           const newFilterPosition =  checkBatteryPosition(row-1,col,filterBatteryPositionRef.current,gameLevel);
+           const newFilterPosition =  checkBatteryPosition(row-1,col,filterBatteryPositionRef.current,dispatch);
            if(newFilterPosition.length === filterBatteryPositionRef.current.length - 1){
             dispatch(setBatteryCollection());
            }
@@ -78,7 +70,7 @@ const GameMatrix = ({gameLevel}:Props) => {
           }
           dogPositionRef.current= ([row + 1, col])
           if(filterBatteryPositionRef.current){
-            const newFilterPosition =  checkBatteryPosition(row+1,col,filterBatteryPositionRef.current,gameLevel);
+            const newFilterPosition =  checkBatteryPosition(row+1,col,filterBatteryPositionRef.current,dispatch);
             if(newFilterPosition.length === filterBatteryPositionRef.current.length - 1){
               dispatch(setBatteryCollection());
              }
@@ -97,7 +89,7 @@ const GameMatrix = ({gameLevel}:Props) => {
           }
           dogPositionRef.current = ([row, col - 1])
           if(filterBatteryPositionRef.current){
-            const newFilterPosition =  checkBatteryPosition(row,col-1,filterBatteryPositionRef.current,gameLevel);
+            const newFilterPosition =  checkBatteryPosition(row,col-1,filterBatteryPositionRef.current,dispatch);
             console.log("Length- ",newFilterPosition.length , filterBatteryPositionRef.current.length)
             if(newFilterPosition.length === filterBatteryPositionRef.current.length - 1){
               dispatch(setBatteryCollection());
@@ -118,7 +110,7 @@ const GameMatrix = ({gameLevel}:Props) => {
           }
           dogPositionRef.current = ([row, col + 1]);
           if(filterBatteryPositionRef.current){
-            const newFilterPosition =  checkBatteryPosition(row,col+1,filterBatteryPositionRef.current,gameLevel);
+            const newFilterPosition =  checkBatteryPosition(row,col+1,filterBatteryPositionRef.current,dispatch);
             if(newFilterPosition.length === filterBatteryPositionRef.current.length - 1){
               dispatch(setBatteryCollection());
              }
@@ -189,9 +181,7 @@ const GameMatrix = ({gameLevel}:Props) => {
               key={cellValue}
               className="bg-[#FFC700] border border-gray-500 h-14 w-14"
             >
-               {matchingPosition && matchingPosition[2] === "electric" && <img src={electric.src} alt="electric" className="h-full w-full" />}
-             {matchingPosition && matchingPosition[2] === "rain" && <img src={rain.src} alt="rain" className="h-full w-full" />}
-            { matchingPosition && matchingPosition[2] === "brick" && <img src={brick.src} alt="brick" className="h-full w-full" />}
+               {matchingPosition && <img src={matchingPosition[2].src} alt="obstacle" className="h-full w-full" />}
             </div>
           );
         }
@@ -205,9 +195,7 @@ const GameMatrix = ({gameLevel}:Props) => {
               key={cellValue}
               className="bg-[#FFC700] border border-gray-500 h-14 w-14"
             >
-             {matchingPosition && matchingPosition[2] === "red" && <img src={redLED.src} alt="red" className="h-full w-full py-1" />}
-             {matchingPosition && matchingPosition[2] === "green" && <img src={greenLED.src} alt="green" className="h-full w-full py-2" />}
-            { matchingPosition && matchingPosition[2] === "yellow" && <img src={yellowLED.src} alt="yellow" className="h-full w-full py-2" />}
+             {matchingPosition && <img src={matchingPosition[2].src} alt="red" className="h-full w-full" />}
             </div>
           );
         }

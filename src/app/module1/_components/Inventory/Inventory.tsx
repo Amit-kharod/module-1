@@ -1,17 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Heading from "../Heading";
 import { CollectBattery } from "@/utils/reduxToolkit/slice/2dGameLevelInterface";
 import RectangleBg from '@/assets/reactangleBg.png';
-import redled from '@/assets/redLED.svg';
-import yellowled from '@/assets/yellowLED.svg';
-import greenled from '@/assets/greenLED.svg';
 import ProgessBar from "./ProgessBar";
+import { useAppSelector } from "@/utils/reduxToolkit/hook";
 
 type Props = {
   collectBattery: CollectBattery | undefined;
 };
 
 const Inventory = ({ collectBattery }: Props) => {
+  //Collected inventory
+  const collectInventory = useAppSelector((state)=>state.game.collectedInventory);
   return (
     <div className="flex flex-col h-full w-full bg-Erie-Black overflow-x-hidden overflow-y-hidden">
       <Heading
@@ -22,26 +22,25 @@ const Inventory = ({ collectBattery }: Props) => {
       <ProgessBar collectBattery={collectBattery}/>
       
        
-      <div className="flex flex-wrap  items-center justify-center pt-2">
-        {collectBattery && collectBattery.red>0 && <div className="relative">
-          <img src={RectangleBg.src} alt="Rectangle Background" className="relative" />
-          <img src={redled.src} alt="Red LED" className="absolute inset-0 m-auto" />
-          <h1 className="absolute bottom-0 left-1/2 transform -translate-x-1/2 text-white text-xs font-normal font-['Inter'] ">Red led</h1>
-        </div>}
-        {collectBattery && collectBattery.yellow>0 && <div className="relative">
-          <img src={RectangleBg.src} alt="Rectangle Background" className="relative" />
-          <img src={yellowled.src} alt="Yellow LED" className="absolute inset-0 m-auto" />
-          <h1 className="absolute bottom-0 left-1/2 transform -translate-x-1/2 text-white text-xs font-normal font-['Inter'] ">Yellow led</h1>
-        </div>}
-        {collectBattery && collectBattery.green>0 && <div className="relative">
-          <img src={RectangleBg.src} alt="Rectangle Background" className="relative" />
-          <img src={greenled.src} alt="green LED" className="absolute inset-0 m-auto" />
-          <h1 className="absolute bottom-0 left-1/2 transform -translate-x-1/2 text-white text-xs font-normal font-['Inter'] ">Green led</h1>
-        </div>}
-        {collectBattery && collectBattery.battery>0 && <div className="relative">
-          <img src={RectangleBg.src} alt="Rectangle Background" className="relative" />
-          <img src={redled.src} alt="Red LED" className="absolute inset-0 m-auto" />
-          <h1 className="absolute bottom-0 left-1/2 transform -translate-x-1/2 text-white text-xs font-normal font-['Inter'] ">Battery</h1>
+      <div className="flex flex-wrap pt-2 px-4">
+        {collectInventory && collectInventory.length>0 && <div className="relative flex flex-wrap">
+          {collectInventory.map((image,ind)=>{
+            console.log("image ",image);
+            return (
+              <div key={ind} className="h-20 w-20 relative mx-2">
+                <div className="relative">
+                  <img src={RectangleBg.src} alt="Rectangle Background" />
+                  <img
+                    src={image.image.src}
+                    alt="Red LED"
+                    className="absolute inset-0 m-auto"
+                  />
+                </div>
+                <h1 className="absolute bottom-0 left-1/2 transform -translate-x-1/2 text-white text-xs font-normal font-['Inter'] ">{image.info}</h1>
+              </div>
+            );
+            
+})}
         </div>}
       </div>
       </div>

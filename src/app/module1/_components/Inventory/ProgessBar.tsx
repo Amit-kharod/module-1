@@ -8,7 +8,6 @@ type Props ={
 }
 const ProgressBarA = ({ collectedCoins, totalBattery }: Props) => {
     const progress = (collectedCoins / totalBattery) * 100; // Calculate the progress percentage
-    console.log("Progress -   ",collectedCoins,totalBattery,progress);
     return (
       <div className="h-5">
         <div className="relative w-full h-5 bg-purple-300 rounded-[5.01px] shadow border border-purple-600">
