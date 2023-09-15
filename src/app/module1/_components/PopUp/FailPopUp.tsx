@@ -14,7 +14,7 @@ const FailPopUp = () => {
             <div className="flex justify-center">
               <button
                 onClick={()=>{
-                  dispatch(setGameResult({result:"pending"}));
+                  dispatch(setGameResult({result:"reset"}));
                 }}
                 className="text-white text-xl px-6 py-3 font-bold font-['Roboto'] leading-7  bg-indigo-600 rounded-xl items-center gap-1.5 inline-flex"
               >

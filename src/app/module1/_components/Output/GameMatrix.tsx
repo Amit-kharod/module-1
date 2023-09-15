@@ -30,7 +30,8 @@ const GameMatrix = ({gameLevel}:Props) => {
   const [filterBatteryPosition,setFilterBatteryPosition] = useState(batteryPosition);
   const filterBatteryPositionRef = useRef(batteryPosition);
 
-  useEffect(()=>{
+  const resetActivity =()=>{
+    //Drop Box will reset
     dispatch(setDropZone());
     dispatch(resetGameLevel());
     setDogPosition(dogStartPosition);
@@ -38,7 +39,16 @@ const GameMatrix = ({gameLevel}:Props) => {
     directionIndexRef.current =directionIndex;
     setFilterBatteryPosition(batteryPosition);
     dogPositionRef.current = dogStartPosition;
-  },[currentGameLevel,gameResult])
+  }
+  useEffect(()=>{
+    resetActivity();
+  },[currentGameLevel]);
+
+  useEffect(()=>{
+    if(gameResult === "reset"){
+     resetActivity();
+    }
+  },[gameResult]);
   
   const moveDog = (direction:any,timer:NodeJS.Timeout) => {
     // Define how the dog moves based on the direction
@@ -143,8 +153,6 @@ const GameMatrix = ({gameLevel}:Props) => {
   };
 
   useEffect(() => {
-    console.log("Play button click ",isGamePlay);
-    console.log("Direction Array - ",directionArray);
     if(isGamePlay){
         const timer = setInterval(() => {
             // Move the dog based on the current direction
@@ -154,7 +162,7 @@ const GameMatrix = ({gameLevel}:Props) => {
             } else {
               // If all directions have been executed, stop the timer
               clearInterval(timer);
-              dispatch(setPlayState({playState:false}));
+              dispatch(setGameResult({result:"fail"}))
             }
           }, 1000);
       
@@ -177,7 +185,7 @@ const GameMatrix = ({gameLevel}:Props) => {
               key={cellValue}
               className="bg-[#FFC700] border border-gray-500 h-14 w-14"
             >
-              <img src={dogImage.src} alt="dog" className="h-full w-full" />
+              <img src={dogImage.src} alt="dog" className="object-cover h-full w-full" />
             </div>
           );
         } 
@@ -190,7 +198,7 @@ const GameMatrix = ({gameLevel}:Props) => {
               key={cellValue}
               className="bg-[#FFC700] border border-gray-500 h-14 w-14"
             >
-               {matchingPosition && <img src={matchingPosition[2].src} alt="obstacle" className="h-full w-full" />}
+               {matchingPosition && <img src={matchingPosition[2].src} alt="obstacle" className="object-cover h-full w-full" />}
             </div>
           );
         }
@@ -204,7 +212,7 @@ const GameMatrix = ({gameLevel}:Props) => {
               key={cellValue}
               className="bg-[#FFC700] border border-gray-500 h-14 w-14"
             >
-             {matchingPosition && <img src={matchingPosition[2].src} alt="red" className="h-full w-full" />}
+             {matchingPosition && <img src={matchingPosition[2].src} alt="red" className="object-cover h-full w-full" />}
             </div>
           );
         }
@@ -215,7 +223,7 @@ const GameMatrix = ({gameLevel}:Props) => {
               key={cellValue}
               className="bg-[#FFC700] border border-gray-500 h-14 w-14"
             >
-              <img src={dogEndPosition[2].src} alt="dog" className="h-full w-full" />
+              <img src={dogEndPosition[2].src} alt="dog" className="object-cover h-full w-full" />
             </div>
           );
         }
