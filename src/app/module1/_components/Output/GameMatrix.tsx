@@ -25,6 +25,7 @@ const GameMatrix = ({gameLevel}:Props) => {
   const lastFilledIndex = useAppSelector((state)=>state.game.lastIndex);
   //Directions filled in workspace empty box.
   const directionArray = useAppSelector((state) => state.game.blocks);
+  const gameResult = useAppSelector((state)=>state.game.result);
   //FilterBatteryPosition
   const [filterBatteryPosition,setFilterBatteryPosition] = useState(batteryPosition);
   const filterBatteryPositionRef = useRef(batteryPosition);
@@ -37,7 +38,7 @@ const GameMatrix = ({gameLevel}:Props) => {
     directionIndexRef.current =directionIndex;
     setFilterBatteryPosition(batteryPosition);
     dogPositionRef.current = dogStartPosition;
-  },[currentGameLevel])
+  },[currentGameLevel,gameResult])
   
   const moveDog = (direction:any,timer:NodeJS.Timeout) => {
     // Define how the dog moves based on the direction

@@ -1,5 +1,5 @@
 import { useAppDispatch } from '@/utils/reduxToolkit/hook'
-import { setGameLevel } from '@/utils/reduxToolkit/slice/2dGameSlice';
+import { resetGameLevel, setGameLevel, setGameResult } from '@/utils/reduxToolkit/slice/2dGameSlice';
 import React from 'react'
 
 const FailPopUp = () => {
@@ -13,7 +13,9 @@ const FailPopUp = () => {
             <p className="h-[14%] mb-4 text-center text-black text-2xl font-bold font-['Roboto'] leading-7 tracking-wid">That's not quite right 😔</p>
             <div className="flex justify-center">
               <button
-                
+                onClick={()=>{
+                  dispatch(setGameResult({result:"pending"}));
+                }}
                 className="text-white text-xl px-6 py-3 font-bold font-['Roboto'] leading-7  bg-indigo-600 rounded-xl items-center gap-1.5 inline-flex"
               >
                 Try Again

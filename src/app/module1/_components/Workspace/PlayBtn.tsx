@@ -11,13 +11,12 @@ const PlayBtn = (props: Props) => {
   const dispatch = useAppDispatch();
 
   return (
-    <div className="flex h-11 w-32 cursor-pointer items-center justify-center rounded bg-[#17FB99]">
+    <div className="flex h-11 w-32 cursor-pointer items-center justify-center rounded bg-[#17FB99]"  onClick={()=>{
+      !isGamePlay && dispatch(setPlayState({playState: true}));
+    }} >
       <div className="flex items-center gap-1 text-black">
         <BsFillPlayFill className="h-7 w-7" />
         <span className=" text-lg font-bold"
-        onClick={()=>{
-          !isGamePlay && dispatch(setPlayState({playState: true}));
-        }} 
         >Play</span>
       </div>
     </div>

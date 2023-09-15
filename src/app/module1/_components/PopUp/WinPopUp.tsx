@@ -1,5 +1,5 @@
 import { useAppDispatch } from '@/utils/reduxToolkit/hook'
-import { setGameLevel } from '@/utils/reduxToolkit/slice/2dGameSlice';
+import { resetGameLevel, setGameLevel } from '@/utils/reduxToolkit/slice/2dGameSlice';
 import React from 'react'
 
 const WinPopUp = () => {
@@ -13,7 +13,9 @@ const WinPopUp = () => {
             <p className="mb-4 text-center text-black text-2xl font-bold font-['Roboto'] leading-7 tracking-wid">Great! You've Completed the level. 🙂</p>
             <div className="flex justify-center">
               <button
-                
+                  onClick={()=>{
+                    dispatch(resetGameLevel());
+                }}
                 className="mx-4 py-3 px-7 bg-amber-400 rounded-xl justify-center items-center gap-1.5 inline-flex text-white text-lg font-bold font-['Roboto'] leading-7"
               >
                 Redo Task
@@ -21,6 +23,7 @@ const WinPopUp = () => {
               <button
                 onClick={()=>{
                     dispatch(setGameLevel());
+                    dispatch(resetGameLevel());
                 }}
                 className="mx-4 py-3 px-7 bg-indigo-600 rounded-xl justify-center items-center gap-1.5 inline-flex text-white text-lg font-bold font-['Roboto'] leading-7"
               >

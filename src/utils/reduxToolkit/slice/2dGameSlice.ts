@@ -66,6 +66,7 @@ const gameSlice = createSlice({
       state.steps = 0;
       state.play = false;
       state.collectedInventory = [];
+      state.result = "pending";
     },
 
     setDropZone: (state) => {
