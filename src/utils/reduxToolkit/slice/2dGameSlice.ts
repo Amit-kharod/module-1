@@ -11,6 +11,7 @@ interface GameState {
   play: boolean;
   blockIndex: number;
   gameLevel: number;
+  result:string;
 }
 
 const initialState: GameState = {
@@ -20,7 +21,8 @@ const initialState: GameState = {
   collectedInventory:[],
   play: false,
   blockIndex: -1,
-  gameLevel: 4,
+  gameLevel: 0,
+  result:"pending"
 };
 
 const gameSlice = createSlice({
@@ -88,7 +90,13 @@ const gameSlice = createSlice({
       image:any}>)=>{
         const {info,image} = action.payload;
         state.collectedInventory.push({info,image});
-    }
+    },
+
+    setGameResult: (state,action: PayloadAction<{
+      result:string}>)=>{
+        const {result} = action.payload;
+        state.result = result;
+      }
   },
 });
 
@@ -99,7 +107,8 @@ export const {
   setGameLevel,
   resetGameLevel,
   setDropZone,
-  setCollectInventory
+  setCollectInventory,
+  setGameResult
 } = gameSlice.actions;
 
 export const getGameLevel = (state: RootState) => state.game.gameLevel;

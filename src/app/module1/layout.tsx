@@ -8,17 +8,28 @@ import Output from "./_components/Output/Output";
 import Inventory from "./_components/Inventory/Inventory";
 import { gameLevelsConfig } from "@/utils/constants/gameLevelConfig";
 import { useAppSelector } from "@/utils/reduxToolkit/hook";
-import { setDropZone } from "@/utils/reduxToolkit/slice/2dGameSlice";
+import FailPopUp from "./_components/PopUp/FailPopUp";
+import WinPopUp from "./_components/PopUp/WinPopUp";
 
 export default function Module1Layout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const currentGameLevel = useAppSelector((state)=>state.game.gameLevel);
-  const {activityTaskDescription,activityTaskDestination,workSpaceBlock,collectedBattery} = gameLevelsConfig[currentGameLevel];
+  const {gameLevel,result} = useAppSelector((state)=>state.game);
+  const {activityTaskDescription,activityTaskDestination,workSpaceBlock,collectedBattery} = gameLevelsConfig[gameLevel];
+  // Determine whether to show the blur effect
+  const showBlurEffect = result === "win" || result === "fail";
+
   return (
-    <section className="h-screen w-screen bg-Erie-Black text-white overflow-x-none overflow-y-none">
+    <>
+    {result === "win" && <WinPopUp />}
+    {result === "fail" && <FailPopUp />}
+     <section
+      className={`h-screen w-screen bg-Erie-Black text-white overflow-x-none overflow-y-none ${
+        showBlurEffect ? "filter blur-sm" : "" // Apply blur effect if needed
+      }`}
+    >
       <NavbarMain />
       <div className="flex h-[90vh] w-full gap-[0.5%]">
         <DndProviderContext>
@@ -30,11 +41,12 @@ export default function Module1Layout({
             <WorkSpace/>
           </div>
           <div className="flex w-[33.95%] flex-col">
-            <Output gameLevel={currentGameLevel}/>
+            <Output gameLevel={gameLevel}/>
             <Inventory collectBattery={collectedBattery}/>
           </div>
         </DndProviderContext>
       </div>
     </section>
+    </>
   );
 }

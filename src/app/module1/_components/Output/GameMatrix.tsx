@@ -2,7 +2,7 @@
 import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import dogImage from '../../../../assets/dog.svg';
 import { useAppSelector,useAppDispatch } from '@/utils/reduxToolkit/hook';
-import { resetGameLevel, setBlockIndex, setDropZone, setPlayState } from '@/utils/reduxToolkit/slice/2dGameSlice';
+import { resetGameLevel, setBlockIndex, setDropZone, setGameResult, setPlayState } from '@/utils/reduxToolkit/slice/2dGameSlice';
 import { checkBatteryPosition, checkObstaclePosition, gameLevelsConfig } from '@/utils/constants/gameLevelConfig';
 import { setBatteryCollection } from '@/utils/reduxToolkit/slice/batteryCollectionSlice';
 import { setGameLevel } from '@/utils/reduxToolkit/slice/2dGameSlice';
@@ -39,14 +39,15 @@ const GameMatrix = ({gameLevel}:Props) => {
     dogPositionRef.current = dogStartPosition;
   },[currentGameLevel])
   
-  const moveDog = (direction:any) => {
+  const moveDog = (direction:any,timer:NodeJS.Timeout) => {
     // Define how the dog moves based on the direction
     const [row, col] = dogPositionRef.current;
     switch (direction) {
       case 'up':
         if (row > 1) {
           if(checkObstaclePosition(row-1,col,obstaclePosition)){
-            alert("You lose");
+            dispatch(setGameResult({result:"fail"}));
+            clearInterval(timer);
             return;
           }
           dogPositionRef.current = ([row - 1, col]);
@@ -59,13 +60,15 @@ const GameMatrix = ({gameLevel}:Props) => {
            setFilterBatteryPosition(newFilterPosition);
           } 
         }else{
-          alert('You lose');
+          dispatch(setGameResult({result:"fail"}));
+          clearInterval(timer);
         }
         break;
       case 'down':
         if (row < rowCount) {
           if(checkObstaclePosition(row+1,col,obstaclePosition)){
-            alert("You lose");
+            dispatch(setGameResult({result:"fail"}));
+            clearInterval(timer);
             return;
           }
           dogPositionRef.current= ([row + 1, col])
@@ -78,13 +81,15 @@ const GameMatrix = ({gameLevel}:Props) => {
              setFilterBatteryPosition(newFilterPosition);
            } 
         }else{
-          alert('You lose');
+          dispatch(setGameResult({result:"fail"}));
+          clearInterval(timer);
         }
         break;
       case 'left':
         if (col > 1){ 
           if(checkObstaclePosition(row,col-1,obstaclePosition)){
-            alert("You lose");
+            dispatch(setGameResult({result:"fail"}));
+            clearInterval(timer);
             return;
           }
           dogPositionRef.current = ([row, col - 1])
@@ -99,13 +104,15 @@ const GameMatrix = ({gameLevel}:Props) => {
              setFilterBatteryPosition(newFilterPosition);
            } 
         }else{
-          alert('You lose');
+          dispatch(setGameResult({result:"fail"}));
+          clearInterval(timer);
         }
         break;
       case 'right':
         if (col < colCount) {
           if(checkObstaclePosition(row,col+1,obstaclePosition)){
-            alert("You lose");
+            dispatch(setGameResult({result:"fail"}));
+            clearInterval(timer);
             return;
           }
           dogPositionRef.current = ([row, col + 1]);
@@ -118,7 +125,8 @@ const GameMatrix = ({gameLevel}:Props) => {
             setFilterBatteryPosition(newFilterPosition);
            } 
         }else{
-          alert('You lose');
+          dispatch(setGameResult({result:"fail"}));
+          clearInterval(timer);
         }
         break;
       default:
@@ -127,8 +135,8 @@ const GameMatrix = ({gameLevel}:Props) => {
     setDogPosition(dogPositionRef.current);
     dispatch(setBlockIndex());
     if(dogPositionRef.current[0] === dogEndPosition[0] && dogPositionRef.current[1] === dogEndPosition[1]){
-      alert("Game win");
-      dispatch(setGameLevel());
+      dispatch(setGameResult({result:"win"}))
+      clearInterval(timer);
       return;
     }
   };
@@ -140,7 +148,7 @@ const GameMatrix = ({gameLevel}:Props) => {
         const timer = setInterval(() => {
             // Move the dog based on the current direction
             if (directionIndexRef.current < lastFilledIndex && directionArray[directionIndexRef.current]) {
-              moveDog(directionArray[directionIndexRef.current].direction);
+              moveDog(directionArray[directionIndexRef.current].direction,timer);
               directionIndexRef.current++; 
             } else {
               // If all directions have been executed, stop the timer
