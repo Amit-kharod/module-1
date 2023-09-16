@@ -1,7 +1,13 @@
+"use client"
+import { useAppDispatch } from '@/utils/reduxToolkit/hook';
+import { setGameLevel, setGivenGameLevel } from '@/utils/reduxToolkit/slice/2dGameSlice';
 import React, { useState } from 'react';
-
-const LevelProgressBar = () => {
+type Props = {
+  gameLevel: number;
+}
+const LevelProgressBar = ({ gameLevel }: Props) => {
   const [startActivity, setStartActivity] = useState(1);
+  const dispatch = useAppDispatch();
 
   const showNextActivities = () => {
     if (startActivity + 5 <= 15) {
@@ -20,9 +26,8 @@ const LevelProgressBar = () => {
       <button
         onClick={showPreviousActivities}
         disabled={startActivity === 1}
-        className={`px-3 py-1 rounded-full  text-white text-xl  ${
-          startActivity === 1 ? ' cursor-not-allowed' : ''
-        }`}
+        className={`px-3 py-1 rounded-full  text-white text-xl  ${startActivity === 1 ? ' cursor-not-allowed' : ''
+          }`}
       >
         &lt;
       </button>
@@ -35,20 +40,31 @@ const LevelProgressBar = () => {
                 style={{ transform: 'translateX(50%)' }}
               ></div>
             )}
-            <div className="flex items-center">
-              <div className="font-bold font-['Roboto'] rounded-full h-8 w-8 flex items-center justify-center border-2 border-Lavender text-blue-500 text-white">
-                {startActivity + index}
+            {((startActivity + index) <= gameLevel + 1) ?
+              <div className={`rounded-full flex items-center bg-[#FFC700] text-black cursor-pointer`}
+              onClick={()=>{
+               //Go to given level.
+               //dispatch(setGivenGameLevel({gameLevel:startActivity+index-1}))
+              }}>
+                <div className={`${(startActivity + index) <= gameLevel + 1 ? 'bg-yellow-200' : ''}font-bold font-['Roboto'] rounded-full h-8 w-8 flex items-center justify-center border-2 border-Lavender`}>
+                  {startActivity + index}
+                </div>
               </div>
-            </div>
+              :
+              <div className={`rounded-full flex items-center text-white`}>
+                <div className={`${(startActivity + index) <= gameLevel + 1 ? 'bg-yellow-200' : ''}font-bold font-['Roboto'] rounded-full h-8 w-8 flex items-center justify-center border-2 border-Lavender`}>
+                  {startActivity + index}
+                </div>
+              </div>
+            }
           </React.Fragment>
         ))}
       </div>
       <button
         onClick={showNextActivities}
         disabled={startActivity + 5 > 15}
-        className={`px-3 py-1 rounded-full text-white text-xl ${
-          startActivity + 5 > 15 ? ' cursor-not-allowed' : ' '
-        }`}
+        className={`px-3 py-1 rounded-full text-white text-xl ${startActivity + 5 > 15 ? ' cursor-not-allowed' : ' '
+          }`}
       >
         &gt;
       </button>

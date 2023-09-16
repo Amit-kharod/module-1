@@ -21,8 +21,8 @@ const initialState: GameState = {
   collectedInventory:[],
   play: false,
   blockIndex: -1,
-  gameLevel: 0,
-  result:"pending"
+  gameLevel: 8,
+  result:"pending",
 };
 
 const gameSlice = createSlice({
@@ -60,6 +60,11 @@ const gameSlice = createSlice({
     setGameLevel: (state) => {
       state.gameLevel = state.gameLevel + 1;
     },
+    setGivenGameLevel:(state,action: PayloadAction<{
+      gameLevel:number}>)=>{
+        const {gameLevel} = action.payload;
+        state.gameLevel = gameLevel;
+    },
     resetGameLevel:(state)=>{
       state.blockIndex = -1;
       state.lastIndex = 0;
@@ -67,6 +72,7 @@ const gameSlice = createSlice({
       state.play = false;
       state.collectedInventory = [];
       state.result = "pending";
+      state.collectedInventory = []
     },
 
     setDropZone: (state) => {
@@ -109,7 +115,8 @@ export const {
   resetGameLevel,
   setDropZone,
   setCollectInventory,
-  setGameResult
+  setGameResult,
+  setGivenGameLevel
 } = gameSlice.actions;
 
 export const getGameLevel = (state: RootState) => state.game.gameLevel;

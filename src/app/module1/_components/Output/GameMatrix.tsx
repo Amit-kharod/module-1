@@ -4,7 +4,7 @@ import dogImage from '../../../../assets/dog.svg';
 import { useAppSelector,useAppDispatch } from '@/utils/reduxToolkit/hook';
 import { resetGameLevel, setBlockIndex, setDropZone, setGameResult, setPlayState } from '@/utils/reduxToolkit/slice/2dGameSlice';
 import { checkBatteryPosition, checkObstaclePosition, gameLevelsConfig } from '@/utils/constants/gameLevelConfig';
-import { setBatteryCollection } from '@/utils/reduxToolkit/slice/batteryCollectionSlice';
+import { resetBatteryCollection, setBatteryCollection } from '@/utils/reduxToolkit/slice/batteryCollectionSlice';
 import { setGameLevel } from '@/utils/reduxToolkit/slice/2dGameSlice';
 interface Props{
   gameLevel:number, 
@@ -34,11 +34,13 @@ const GameMatrix = ({gameLevel}:Props) => {
     //Drop Box will reset
     dispatch(setDropZone());
     dispatch(resetGameLevel());
+    dispatch(resetBatteryCollection());
     setDogPosition(dogStartPosition);
     setDirectionIndex(0);
     directionIndexRef.current =directionIndex;
     setFilterBatteryPosition(batteryPosition);
     dogPositionRef.current = dogStartPosition;
+    filterBatteryPositionRef.current = batteryPosition;
   }
   useEffect(()=>{
     resetActivity();

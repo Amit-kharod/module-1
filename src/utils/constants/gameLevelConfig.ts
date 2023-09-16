@@ -75,10 +75,7 @@ export const gameLevelsConfig : gameLevelsInterface[] = [
     dogEndPosition:[6,3,craftgif],
     obstaclePosition:[[1,2,cafegif],[2,4,cafegif],[3,1,cafegif],[4,4,cafegif],[6,5,cafegif],[6,6,cafegif]],
     batteryPosition:[[1,6,redled],[5,6,greenled],[2,2,yellowled]],
-    collectedBattery:{
-      totalCollect:0,
-      totalBattery:3
-    }
+    totalBattery:3
   },
   {
     level: 6,
@@ -89,10 +86,7 @@ export const gameLevelsConfig : gameLevelsInterface[] = [
     dogEndPosition:[6,3,craftgif],    
     obstaclePosition:[[1,3,bombgif],[3,5,bombgif],[4,2,bombgif],[6,6,bombgif]],
     batteryPosition:[[1,4,pollutedfactorygif],[2,6,pollutedfactorygif],[3,6,pollutedfactorygif],[4,1,pollutedfactorygif],[6,5,pollutedfactorygif]],
-    collectedBattery:{
-      totalCollect:0,
-      totalBattery:5
-    }
+    totalBattery:5
   },
   {
     level: 7,
@@ -103,10 +97,7 @@ export const gameLevelsConfig : gameLevelsInterface[] = [
     dogEndPosition:[6,3,craftgif],
     obstaclePosition:[[1,6,raingif],[2,6,raingif],[3,2,raingif],[3,3,raingif],[3,4,raingif],[3,6,raingif],[5,1,raingif],[6,1,raingif],[6,5,raingif],[6,6,raingif]],
     batteryPosition:[[1,1,rod],[4,6,rod]],
-    collectedBattery:{
-      totalCollect:0,
-      totalBattery:2
-    }
+    totalBattery:2
   },
   {
     level: 8,
@@ -117,10 +108,7 @@ export const gameLevelsConfig : gameLevelsInterface[] = [
     dogEndPosition:[6,3,craftgif],
     obstaclePosition:[[1,2,octopusgif],[1,5,fishgif],[2,1,fishgif],[2,3,fishgif],[3,1,octopusgif],[3,6,octopusgif],[5,4,shipgif]],
     batteryPosition:[[2,4,switchgif]],
-    collectedBattery:{
-      totalCollect:0,
-      totalBattery:1
-    }
+    totalBattery:1
   },
   {
     level: 9,
@@ -131,10 +119,7 @@ export const gameLevelsConfig : gameLevelsInterface[] = [
     dogEndPosition:[6,3,craftgif],
     obstaclePosition:[[1,2,brick],[2,2,brick],[3,2,brick],[2,4,brick],[2,5,brick],[2,6,brick],[5,2,brick],[5,3,brick],[5,4,brick],[5,6,brick],[6,4,brick]],
     batteryPosition:[[1,3,mystryboxgif],[3,6,mystryboxgif],[6,1,mystryboxgif]],
-    collectedBattery:{
-      totalCollect:0,
-      totalBattery:3
-    }
+    totalBattery:3
   },
   {
     level: 10,
@@ -145,10 +130,7 @@ export const gameLevelsConfig : gameLevelsInterface[] = [
     dogEndPosition:[6,3,craftgif],
     obstaclePosition:[[1,6,sparkgif],[2,3,sparkgif],[2,6,sparkgif],[3,4,sparkgif],[4,5,sparkgif],[5,1,sparkgif],[6,1,sparkgif]],
     batteryPosition:[[3,5,woodengif]],
-    collectedBattery:{
-      totalCollect:0,
-      totalBattery:1
-    }
+    totalBattery:1
   },
   {
     level: 11,
@@ -159,10 +141,7 @@ export const gameLevelsConfig : gameLevelsInterface[] = [
     dogEndPosition:[6,3,craftgif],
     obstaclePosition:[[1,4,bottlemachinerygif],[1,6,bottlemachinerygif],[2,2,bottlemachinerygif],[2,3,bottlemachinerygif],[2,6,bottlemachinerygif],[3,1,bottlemachinerygif],[4,2,bottlemachinerygif],[4,5,bottlemachinerygif]],
     batteryPosition:[[3,4,carpentrygif]],
-    collectedBattery:{
-      totalCollect:0,
-      totalBattery:1
-    }
+    totalBattery:1
   },
   {
     level: 12,

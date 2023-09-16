@@ -5,9 +5,11 @@ import avatar from "./Gamified User Avatar.svg";
 import stars from "./Stars.svg";
 import LevelProgressBar from "./LevelProgressBar";
 
-type Props = {};
+type Props = {
+  gameLevel:number
+};
 
-const NavbarMain = (props: Props) => {
+const NavbarMain = ({gameLevel}: Props) => {
   return (
     <div className="flex h-[10vh] items-center bg-Erie-Black">
       <div className="w-full flex justify-between items-center px-10">
@@ -18,7 +20,7 @@ const NavbarMain = (props: Props) => {
         
         {/* Center */}
         <div className="flex justify-center">
-          <LevelProgressBar />
+          <LevelProgressBar gameLevel={gameLevel}/>
         </div>
         
         {/* Right Side */}

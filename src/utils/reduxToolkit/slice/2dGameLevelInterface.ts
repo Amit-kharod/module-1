@@ -1,7 +1,4 @@
-export interface CollectBattery {
-    totalCollect:number,
-    totalBattery:number,
-};
+
 export interface gameLevelsInterface {
     level: number,
     activityTaskDescription : string,
@@ -13,7 +10,7 @@ export interface gameLevelsInterface {
     obstaclePosition?:[number,number,any][],
     obstacleImage?: string,
     batteryImage?:string[],
-    collectedBattery?:CollectBattery
+    totalBattery?:number
 }
 
 

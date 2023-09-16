@@ -1,6 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../store";
 
 interface batteryCollectState {
   collectedBatteryNumber :number
@@ -15,11 +13,14 @@ const batteryCollectionSlice = createSlice({
   reducers: {
     setBatteryCollection:(state)=>{
       state.collectedBatteryNumber = state.collectedBatteryNumber+1;
+    },
+    resetBatteryCollection:(state)=>{
+      state.collectedBatteryNumber = 0;
     }
   },
 });
 
-export const {setBatteryCollection } = batteryCollectionSlice.actions;
+export const {setBatteryCollection, resetBatteryCollection} = batteryCollectionSlice.actions;
 
 
 export default batteryCollectionSlice;

@@ -1,13 +1,13 @@
 import { useAppSelector } from "@/utils/reduxToolkit/hook";
-import { CollectBattery } from "@/utils/reduxToolkit/slice/2dGameLevelInterface";
 import React, { useState } from "react";
 
 type Props ={
   collectedCoins: number,
-  totalBattery: number
+  totalBattery: number|undefined
 }
 const ProgressBarA = ({ collectedCoins, totalBattery }: Props) => {
-    const progress = (collectedCoins / totalBattery) * 100; // Calculate the progress percentage
+    const progress = totalBattery?((collectedCoins / totalBattery) * 100):0; // Calculate the progress percentage
+    console.log({collectedCoins,totalBattery,progress})
     return (
       <div className="h-5">
         <div className="relative w-full h-5 bg-purple-300 rounded-[5.01px] shadow border border-purple-600">
@@ -21,11 +21,12 @@ const ProgressBarA = ({ collectedCoins, totalBattery }: Props) => {
   };
 
 type ProgressBarProps ={
-  collectBattery:CollectBattery|undefined;
+  collectInventory:any|undefined;
+  totalBattery:number|undefined;
 }
-const ProgessBar = ({collectBattery}:ProgressBarProps) => {
+const ProgessBar = ({collectInventory,totalBattery}:ProgressBarProps) => {
   const collectedCoins = useAppSelector((state)=>state.batteryCollection.collectedBatteryNumber);
-  const totalBattery = collectBattery?.totalBattery || 0; // Set your target number of coins
+  console.log("Progress -  ",collectedCoins,totalBattery)
   return (
     <div className="p-4">
       <ProgressBarA collectedCoins={collectedCoins} totalBattery={totalBattery} />
