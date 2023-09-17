@@ -16,7 +16,7 @@ export default function Module1Layout({
 }: {
   children: React.ReactNode;
 }) {
-  const {gameLevel,result,lastIndex} = useAppSelector((state)=>state.game);
+  const {gameLevel,maxLevel,result,lastIndex} = useAppSelector((state)=>state.game);
   const {activityTaskDescription,activityTaskDestination,totalBattery,winStar} = gameLevelsConfig[gameLevel];
   // Determine whether to show the blur effect
   const showBlurEffect = result === "win" || result === "fail";
@@ -30,7 +30,7 @@ export default function Module1Layout({
         showBlurEffect ? "filter blur-sm" : "" // Apply blur effect if needed
       }`}
     >
-      <NavbarMain gameLevel={gameLevel}/>
+      <NavbarMain maxLevel={maxLevel}/>
       <div className="flex h-[90vh] w-full gap-[0.5%]">
         <DndProviderContext>
           <div className="flex w-[26.3%] flex-col border-r border-r-Lavender/30">

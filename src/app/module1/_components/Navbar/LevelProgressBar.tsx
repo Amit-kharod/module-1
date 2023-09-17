@@ -3,9 +3,9 @@ import { useAppDispatch } from '@/utils/reduxToolkit/hook';
 import { setGameLevel, setGivenGameLevel } from '@/utils/reduxToolkit/slice/2dGameSlice';
 import React, { useState } from 'react';
 type Props = {
-  gameLevel: number;
+  maxLevel: number;
 }
-const LevelProgressBar = ({ gameLevel }: Props) => {
+const LevelProgressBar = ({ maxLevel }: Props) => {
   const [startActivity, setStartActivity] = useState(1);
   const dispatch = useAppDispatch();
 
@@ -40,19 +40,19 @@ const LevelProgressBar = ({ gameLevel }: Props) => {
                 style={{ transform: 'translateX(50%)' }}
               ></div>
             )}
-            {((startActivity + index) <= gameLevel + 1) ?
+            {((startActivity + index) <= maxLevel + 1) ?
               <div className={`rounded-full flex items-center bg-[#FFC700] text-black cursor-pointer`}
               onClick={()=>{
                //Go to given level.
-               //dispatch(setGivenGameLevel({gameLevel:startActivity+index-1}))
+               dispatch(setGivenGameLevel({gameLevel:startActivity+index-1}))
               }}>
-                <div className={`${(startActivity + index) <= gameLevel + 1 ? 'bg-yellow-200' : ''}font-bold font-['Roboto'] rounded-full h-8 w-8 flex items-center justify-center border-2 border-Lavender`}>
+                <div className={`${(startActivity + index) <= maxLevel + 1 ? 'bg-yellow-200' : ''}font-bold font-['Roboto'] rounded-full h-8 w-8 flex items-center justify-center border-2 border-Lavender`}>
                   {startActivity + index}
                 </div>
               </div>
               :
               <div className={`rounded-full flex items-center text-white`}>
-                <div className={`${(startActivity + index) <= gameLevel + 1 ? 'bg-yellow-200' : ''}font-bold font-['Roboto'] rounded-full h-8 w-8 flex items-center justify-center border-2 border-Lavender`}>
+                <div className={`${(startActivity + index) <= maxLevel + 1 ? 'bg-yellow-200' : ''}font-bold font-['Roboto'] rounded-full h-8 w-8 flex items-center justify-center border-2 border-Lavender`}>
                   {startActivity + index}
                 </div>
               </div>

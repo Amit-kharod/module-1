@@ -2,7 +2,7 @@
 import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import dogImage from '../../../../assets/dog.svg';
 import { useAppSelector,useAppDispatch } from '@/utils/reduxToolkit/hook';
-import { resetGameLevel, setBlockIndex, setDropZone, setGameResult, setPlayState } from '@/utils/reduxToolkit/slice/2dGameSlice';
+import { resetGameLevel, setBlockIndex, setDropZone, setGameResult, setGivenBlockIndex, setPlayState } from '@/utils/reduxToolkit/slice/2dGameSlice';
 import { checkBatteryPosition, checkObstaclePosition, gameLevelsConfig } from '@/utils/constants/gameLevelConfig';
 import { resetBatteryCollection, setBatteryCollection } from '@/utils/reduxToolkit/slice/batteryCollectionSlice';
 import { setGameLevel } from '@/utils/reduxToolkit/slice/2dGameSlice';
@@ -161,6 +161,7 @@ const GameMatrix = ({gameLevel}:Props) => {
             if (directionIndexRef.current < lastFilledIndex && directionArray[directionIndexRef.current]) {
               moveDog(directionArray[directionIndexRef.current].direction,timer);
               directionIndexRef.current++; 
+              dispatch(setGivenBlockIndex({lastIndex:directionIndexRef.current}));
             } else {
               // If all directions have been executed, stop the timer
               clearInterval(timer);

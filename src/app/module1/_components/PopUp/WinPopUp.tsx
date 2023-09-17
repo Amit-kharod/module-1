@@ -3,10 +3,12 @@ import { useAppDispatch, useAppSelector } from '@/utils/reduxToolkit/hook'
 import { winStarInterface } from '@/utils/reduxToolkit/slice/2dGameLevelInterface';
 import { resetGameLevel, setGameLevel, setGameResult } from '@/utils/reduxToolkit/slice/2dGameSlice';
 import React from 'react';
-// import zerostar from '@/assets/popup/zerostar.webp';
-// import onestar from '@/assets/popup/onestar.webp';
-// import twostar from '@/assets/popup/twostar.webp';
-// import threestar from '@/assets/popup/threestar.webp';
+import onestar from '@/assets/popup/onestar.png';
+import twostar from '@/assets/popup/twostar.png';
+import threestar from '@/assets/popup/threestar.png';
+import popupbg from '@/assets/popup/popupbackup.png';
+import dogimg from '@/assets/dog.svg';
+
 type Props = {
   winStar: winStarInterface[],
   lastIndex: number;
@@ -17,20 +19,23 @@ const WinPopUp = ({ winStar, lastIndex }: Props) => {
   { console.log("winStar- ", winStar) }
   console.log("LastIndex- ,collectBattery",lastIndex,collectBattery)
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50  w-1/2 h-[60%] mx-auto my-auto ">
-      <div className="bg-white w-full h-full rounded-lg shadow-md p-6">
-        <div className='h-[70%] flex justify-center items-center'>
+    <div className="fixed inset-0 flex items-center justify-center z-50  w-1/2 h-[70%] mx-auto my-auto ">
+      <div className="bg-white w-full h-fit rounded-lg shadow-md p-6">
+        <div className='flex justify-center'>
+        <img src={dogimg.src} className='w-1/5' alt="dog"/>
+        </div>
+        <div className='h-full flex justify-center items-center my-5'>
           {
             ((lastIndex <= winStar[0].steps) && (winStar[0].battery === collectBattery) ? (
-              <img className='h-[60%]' alt="3star" src={''} />
+              <img className='h-20' alt="3star" src={threestar.src}  />
             ) : (
               (lastIndex <= winStar[1].steps ) && (winStar[1].battery === collectBattery) ? (
-                <img className='h-[60%]' alt="2 star" src={''} />
+                <img className='h-20' alt="2 star" src={twostar.src} />
               ): (
                 (lastIndex <= winStar[2].steps) && (winStar[2].battery === collectBattery) ?(
-                  <img className='h-[60%]' alt="1 star" src={''} />
+                  <img className='h-20' alt="1 star" src={onestar.src} />
                 ):(
-                  <img className='h-[60%]' alt="0 star" src={''} />
+                  <img className='h-20' alt="0 star" src={''} />
                 )
               )
              ))

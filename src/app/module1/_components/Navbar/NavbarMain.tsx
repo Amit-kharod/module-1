@@ -6,10 +6,10 @@ import stars from "./Stars.svg";
 import LevelProgressBar from "./LevelProgressBar";
 
 type Props = {
-  gameLevel:number
+  maxLevel:number
 };
 
-const NavbarMain = ({gameLevel}: Props) => {
+const NavbarMain = ({maxLevel}: Props) => {
   return (
     <div className="flex h-[10vh] items-center bg-Erie-Black">
       <div className="w-full flex justify-between items-center px-10">
@@ -20,7 +20,7 @@ const NavbarMain = ({gameLevel}: Props) => {
         
         {/* Center */}
         <div className="flex justify-center">
-          <LevelProgressBar gameLevel={gameLevel}/>
+          <LevelProgressBar maxLevel={maxLevel}/>
         </div>
         
         {/* Right Side */}
