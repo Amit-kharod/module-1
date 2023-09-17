@@ -21,7 +21,7 @@ const initialState: GameState = {
   collectedInventory:[],
   play: false,
   blockIndex: -1,
-  gameLevel: 8,
+  gameLevel: 0,
   result:"pending",
 };
 

@@ -16,14 +16,14 @@ export default function Module1Layout({
 }: {
   children: React.ReactNode;
 }) {
-  const {gameLevel,result} = useAppSelector((state)=>state.game);
-  const {activityTaskDescription,activityTaskDestination,totalBattery} = gameLevelsConfig[gameLevel];
+  const {gameLevel,result,lastIndex} = useAppSelector((state)=>state.game);
+  const {activityTaskDescription,activityTaskDestination,totalBattery,winStar} = gameLevelsConfig[gameLevel];
   // Determine whether to show the blur effect
   const showBlurEffect = result === "win" || result === "fail";
 
   return (
     <>
-    {result === "win" && <WinPopUp />}
+    {result === "win" && <WinPopUp winStar={winStar} lastIndex={lastIndex}/>}
     {result === "fail" && <FailPopUp />}
      <section
       className={`h-screen w-screen bg-Erie-Black text-white overflow-x-none overflow-y-none ${

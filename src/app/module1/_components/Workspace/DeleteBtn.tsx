@@ -16,7 +16,7 @@ const DeleteBtn = (props: Props) => {
     }),
   });
   return (
-    <div className="h-12 w-12 p-2 border border border-[#9745F6] rounded-full bg-Erie-Black ml-28" ref={drop}>
+    <div className="h-12 w-12 p-2 border border border-[#9745F6] rounded-full bg-Erie-Black" ref={drop}>
       <img src={dustbin.src} alt="dustbin"/>
     </div>
   );

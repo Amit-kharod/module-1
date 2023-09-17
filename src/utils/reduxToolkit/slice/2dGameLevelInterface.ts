@@ -1,4 +1,8 @@
-
+export interface winStarInterface{
+    steps:number,
+    battery:number,
+    star:number,
+}
 export interface gameLevelsInterface {
     level: number,
     activityTaskDescription : string,
@@ -10,7 +14,8 @@ export interface gameLevelsInterface {
     obstaclePosition?:[number,number,any][],
     obstacleImage?: string,
     batteryImage?:string[],
-    totalBattery?:number
+    totalBattery?:number,
+    winStar:winStarInterface[]
 }
 
 

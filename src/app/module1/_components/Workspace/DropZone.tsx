@@ -50,7 +50,7 @@ const DropZone = ({ blockData }: Props) => {
   }, [blockData.direction]);
   return (
     <div
-      className={`${(blockIndex===blockData.index)?'border border-[#17FB99] shadow-2xl':''} border border-[#17FB99] relative flex h-11 w-11 items-center justify-center rounded 
+      className={`${(blockIndex===blockData.index)?'border border-green-800 border-2 shadow-2xl':''} border border-[#17FB99] relative flex h-11 w-11 items-center justify-center rounded 
       bg-white/25`}
       ref={drop}
     >

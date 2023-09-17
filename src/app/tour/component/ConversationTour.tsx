@@ -11,6 +11,9 @@ const ConversationTour = () => {
         <img src={scene4.src} alt="img" className={`h-full w-[50%]`} />
         <img src={scene4right?.src} alt="img" className='h-full w-[25%]' />
       </div>
+      <div>
+        
+      </div>
       <div className='flex bg-[#000000B8] w-full h-[28%] z-9 absolute bottom-0'>
         <div className='flex flex-col items-center justify-center flex-shrink-0 h-full w-[75%] text-left pl-16'>
           <p className='text-white font-poppins text-md font-normal leading-normal text-left'>
