@@ -8,7 +8,6 @@ import twostar from '@/assets/popup/twostar.png';
 import threestar from '@/assets/popup/threestar.png';
 import popupbg from '@/assets/popup/popupbackup.png';
 import dogimg from '@/assets/dog.svg';
-import { Roboto } from 'next/font/google'
 
 type Props = {
   winStar: winStarInterface[],
@@ -19,7 +18,7 @@ const WinPopUp = ({ winStar, lastIndex }: Props) => {
   const collectBattery = useAppSelector((state) => state.batteryCollection.collectedBatteryNumber);
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50  w-1/2 h-[70%] mx-auto my-auto ">
-      <div className="bg-white w-full h-fit rounded-lg shadow-md p-6">
+      <div className="absolute bg-white w-full h-fit rounded-lg shadow-md p-6">
         <div className='flex justify-center'>
         <img src={dogimg.src} className='w-1/5' alt="dog"/>
         </div>

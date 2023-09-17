@@ -1,10 +1,6 @@
 "use client";
-import DndProviderContext from "@/utils/context/DndProviderContext";
-import { gameLevelsConfig } from "@/utils/constants/gameLevelConfig";
-import { useAppSelector } from "@/utils/reduxToolkit/hook";
 import SceneTour from "./component/SceneTour";
-import { useState } from "react";
-import { tourConfig } from "@/utils/tourConstant/tourCons";
+import { useState,Suspense } from "react";
 import ConversationTour from "./component/ConversationTour";
 
 export default function ResultLayout({
