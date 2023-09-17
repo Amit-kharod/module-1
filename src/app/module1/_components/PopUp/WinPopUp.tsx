@@ -8,6 +8,7 @@ import twostar from '@/assets/popup/twostar.png';
 import threestar from '@/assets/popup/threestar.png';
 import popupbg from '@/assets/popup/popupbackup.png';
 import dogimg from '@/assets/dog.svg';
+import { Roboto } from 'next/font/google'
 
 type Props = {
   winStar: winStarInterface[],
@@ -16,8 +17,6 @@ type Props = {
 const WinPopUp = ({ winStar, lastIndex }: Props) => {
   const dispatch = useAppDispatch();
   const collectBattery = useAppSelector((state) => state.batteryCollection.collectedBatteryNumber);
-  { console.log("winStar- ", winStar) }
-  console.log("LastIndex- ,collectBattery",lastIndex,collectBattery)
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50  w-1/2 h-[70%] mx-auto my-auto ">
       <div className="bg-white w-full h-fit rounded-lg shadow-md p-6">
@@ -42,13 +41,13 @@ const WinPopUp = ({ winStar, lastIndex }: Props) => {
           }
 
         </div>
-        <p className="mb-4 text-center text-black text-2xl font-bold font-['Roboto'] leading-7 tracking-wid">Great! You've Completed the level. 🙂</p>
+        <p className="mb-5 text-center text-black text-xl font-roboto leading-7 tracking-wid">Great! You've Completed the level. 🙂</p>
         <div className="flex justify-center">
           <button
             onClick={() => {
               dispatch(setGameResult({ result: "reset" }));
             }}
-            className="mx-4 py-3 px-7 bg-amber-400 rounded-xl justify-center items-center gap-1.5 inline-flex text-white text-lg font-bold font-['Roboto'] leading-7"
+            className={`mx-4 py-3 px-7 bg-amber-400 rounded-xl justify-center items-center font-roboto gap-1.5 inline-flex text-white text-lg leading-7`}
           >
             Redo Task
           </button>
